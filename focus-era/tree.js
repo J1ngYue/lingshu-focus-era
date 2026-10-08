@@ -3,40 +3,32 @@ var FocusTree = (() => {
   const cameras = {}, colors = ['#ca805b','#6daba9','#b8a052','#78a477','#9a82b4','#718fa4'];
   let active, observer, motionFrame, motionTarget;
   function layout(path) {
-    const nodes = FocusData.skills.filter(n=>n.path===path).map(n=>{
-      let x,y;
-      if(path==='tech') { x=190+n.step*164; y=140+n.branch*124+(n.step%2?18:0); }
-      else if(path==='cultivation') {
-        const lanes=[810,490,235,1120,1390,1630];
-        x=lanes[n.branch]+(n.branch?Math.sin(n.step*.9+n.branch)*32:0);y=2250-n.step*122;
-      } else {
-        const angle=n.branch*Math.PI/3-Math.PI/2,cluster=Math.floor(n.step/6),local=n.step%6;
-        const radius=420+cluster*500, a=angle+Math.PI+(local*Math.PI/3);
-        x=1800+Math.cos(angle)*radius+Math.cos(a)*132;
-        y=1800+Math.sin(angle)*radius+Math.sin(a)*132;
+    const columns=[1480,220,640,1060,1900,2320],width=2600,height=2370,root={x:1480,y:2250};
+    const nodes=FocusData.skills.filter(n=>n.path===path).map(n=>{
+      const linear=n.branch===0&&path!=='arcane',base=columns[n.branch];
+      let x=base,y;
+      if(linear)y=2070-n.step*114;
+      else {
+        const start=1950-(n.branch%3)*70;
+        if(n.step<6){x=base+(n.step%2?14:-14);y=start-n.step*118;}
+        else {const right=n.step>=12,step=right?n.step-12:n.step-6;x=base+(right?100:-100)+(step%2?10:0);y=start-5*118-160-step*142;}
       }
       return {...n,x,y};
     });
-    return {nodes,width:path==='tech'?3190:path==='cultivation'?1880:3600,height:path==='tech'?920:path==='cultivation'?2440:3600,root:path==='tech'?{x:48,y:450}:path==='cultivation'?{x:810,y:2370}:{x:1800,y:1800}};
+    return {nodes,width,height,root};
   }
   function render(path,state,icon,esc,selected) {
     const map=layout(path),byId=Object.fromEntries(map.nodes.map(n=>[n.id,n]));
-    let decoration='';
-    if(path==='tech') decoration=Array.from({length:6},(_,i)=>`<rect x="${100+i*492}" y="56" width="470" height="812" rx="18" fill="${i%2?'#9b865507':'#9b865513'}"/><text x="${345+i*492}" y="86" class="era-label">${['营火纪元','聚落纪元','灵械纪元','灵能纪元','星际纪元','万界纪元'][i]}</text>`).join('');
-    if(path==='cultivation') decoration=`<path d="M810 2380 V92" class="meridian"/>`+[180,370,565,840].map((r,i)=>`<ellipse cx="810" cy="1240" rx="${r}" ry="${r*1.22}" class="ritual-ring"/><text x="${810+r}" y="1240" class="rune-label">${['心','意','道','界'][i]}</text>`).join('');
-    if(path==='arcane') decoration=[420,920,1420,1660].map(r=>`<circle cx="1800" cy="1800" r="${r}" class="ritual-ring"/>`).join('')+Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<path d="M1800 1800 L${1800+Math.cos(a)*1660} ${1800+Math.sin(a)*1660}" class="radial-guide"/>`;}).join('');
+    const decoration=`<path d="M${map.root.x} ${map.root.y} V${map.root.y-130}" class="pixel-trunk"/><text x="${map.root.x}" y="${map.root.y+66}" class="origin-caption">${path==='tech'?'文明本源':path==='cultivation'?'灵根 · 道心':'元素本源'}</text>`;
     const links=map.nodes.map(n=>{
       const p=byId[n.parent]||map.root,learned=state.skills[n.id],available=!FocusEngine.skillReason(state,n);
-      const d=path==='tech'?`M${p.x} ${p.y} C${(p.x+n.x)/2} ${p.y} ${(p.x+n.x)/2} ${n.y} ${n.x} ${n.y}`:`M${p.x} ${p.y} L${n.x} ${n.y}`;
+      const elbow=n.parent?(p.y+n.y)/2:map.root.y-130;const d=`M${p.x} ${p.y} V${elbow} H${n.x} V${n.y}`;
       return `<path d="${d}" class="tree-link ${learned?'lit':available?'ready':''}" data-edge="${n.id}"/>`;
     }).join('');
-    const labels=FocusData.branchNames[path].map((name,b)=>{
-      let x,y;if(path==='tech'){x=145;y=103+b*124;}else if(path==='cultivation'){const n=map.nodes.find(n=>n.branch===b&&n.step===17);x=n.x;y=72;}else{const a=b*Math.PI/3-Math.PI/2;x=1800+Math.cos(a)*1660;y=1800+Math.sin(a)*1660;}
-      return `<text x="${x}" y="${y}" class="branch-label" style="fill:${path==='arcane'?colors[b]:'#556b4b'}">${name}</text>`;
-    }).join('');
-    return `<div id="tree-viewport" class="tree-viewport" tabindex="0" aria-label="${esc(FocusData.paths[path].name)}，拖动平移，滚轮缩放，方向键移动"><div id="tree-plane" class="tree-plane" style="width:${map.width}px;height:${map.height}px"><svg class="tree-lines" width="${map.width}" height="${map.height}" aria-hidden="true">${decoration}${links}${labels}<circle cx="${map.root.x}" cy="${map.root.y}" r="30" class="tree-origin"/><text x="${map.root.x}" y="${map.root.y+6}" class="origin-label">${path==='tech'?'始':path==='cultivation'?'凡':'源'}</text></svg>${map.nodes.map(n=>{
+    const labels=FocusData.branchNames[path].map((name,b)=>{const n=map.nodes.find(n=>n.branch===b&&n.step===0);return `<text x="${n.x}" y="${n.y+80}" class="branch-label" style="fill:${colors[b]}">${name}</text>`;}).join('');
+    return `<div id="tree-viewport" class="tree-viewport" tabindex="0" aria-label="${esc(FocusData.paths[path].name)}，拖动平移，滚轮缩放，方向键移动"><div id="tree-plane" class="tree-plane" style="width:${map.width}px;height:${map.height}px"><svg class="tree-lines" width="${map.width}" height="${map.height}" aria-hidden="true">${decoration}${links}${labels}<rect x="${map.root.x-30}" y="${map.root.y-30}" width="60" height="60" class="tree-origin"/><text x="${map.root.x}" y="${map.root.y+6}" class="origin-label">${path==='tech'?'始':path==='cultivation'?'凡':'源'}</text></svg>${map.nodes.map(n=>{
       const learned=!!state.skills[n.id],reason=FocusEngine.skillReason(state,n),major=n.step%6===5||path==='cultivation'&&n.branch===0;
-      return `<button class="tree-node ${path==='tech'?'hex-node':''} ${major?'notable':''} ${learned?'learned':!reason?'available':'locked'} ${selected===n.id?'selected':''}" style="left:${n.x}px;top:${n.y}px;--node-color:${path==='arcane'?colors[n.branch]:FocusData.paths[path].color}" data-action="select-node" data-id="${n.id}" data-branch="${n.branch}" title="${esc(n.name)} · ${learned?'已点亮':reason||n.cost+' 灵感'}" aria-label="${esc(n.name)}，${learned?'已点亮':!reason?'可点亮':'未解锁'}"><span class="node-seal">${icon(n.icon)}</span><span class="map-node-name">${esc(n.name)}</span>${learned?'<span class="node-check">✓</span>':''}</button>`;
+      return `<button class="tree-node  ${major?'notable':''} ${learned?'learned':!reason?'available':'locked'} ${selected===n.id?'selected':''}" style="left:${n.x}px;top:${n.y}px;--node-color:${path==='arcane'?colors[n.branch]:FocusData.paths[path].color}" data-action="select-node" data-id="${n.id}" data-branch="${n.branch}" title="${esc(n.name)} · ${learned?'已点亮':reason||n.cost+' 灵感'}" aria-label="${esc(n.name)}，${learned?'已点亮':!reason?'可点亮':'未解锁'}"><span class="node-seal">${FocusPixels.nodeIcon(n.id)}</span><span class="map-node-name">${esc(n.name)}</span>${learned?'<span class="node-check">✓</span>':''}</button>`;
     }).join('')}</div></div><div class="tree-tools"><button data-action="tree-zoom" data-direction="out" aria-label="缩小成长树">−</button><span id="tree-zoom-label">100%</span><button data-action="tree-zoom" data-direction="in" aria-label="放大成长树">＋</button><button data-action="tree-fit">全图</button><button data-action="tree-reset">起点</button></div><div class="tree-map-caption">拖动探索 · 滚轮缩放 · 点选查看 · 确认后点亮</div><svg id="tree-minimap" class="tree-minimap" viewBox="0 0 ${map.width} ${map.height}" aria-label="成长树全景小地图">${links}${map.nodes.map(n=>`<circle cx="${n.x}" cy="${n.y}" r="${state.skills[n.id]?13:9}" fill="${state.skills[n.id]?'#67977b':'#c2b087'}"/>`).join('')}<rect id="minimap-camera" fill="#bc975121" stroke="#8f7041" stroke-width="10"/></svg>`;
   }
   function mount(path,selected) {
@@ -60,7 +52,7 @@ var FocusTree = (() => {
   function move(target){if(!active)return;const current=active,from={x:active.camera.x,y:active.camera.y,zoom:active.camera.zoom};stopMotion();if(matchMedia('(prefers-reduced-motion: reduce)').matches){Object.assign(active.camera,target);update();return;}motionTarget=target;const start=performance.now();function frame(now){if(active!==current)return;const t=Math.min(1,(now-start)/170),ease=1-(1-t)**3;for(const key of ['x','y','zoom'])current.camera[key]=from[key]+(target[key]-from[key])*ease;update();if(t<1)motionFrame=requestAnimationFrame(frame);else motionTarget=null;}motionFrame=requestAnimationFrame(frame);}
   function zoom(factor,x,y){if(!active)return;const {viewport:v}=active,c=motionTarget||active.camera;x=x??v.clientWidth/2;y=y??v.clientHeight/2;const next=Math.max(.16,Math.min(1.8,c.zoom*factor)),ratio=next/c.zoom;move({x:x-(x-c.x)*ratio,y:y-(y-c.y)*ratio,zoom:next});}
   function fit(){if(!active)return;stopMotion();const {camera:c,map,viewport:v}=active;c.zoom=Math.min((v.clientWidth-60)/map.width,(v.clientHeight-100)/map.height,1);c.x=(v.clientWidth-map.width*c.zoom)/2;c.y=(v.clientHeight-map.height*c.zoom)/2;c.initialized=true;update();}
-  function reset(){if(!active)return;stopMotion();const {camera:c,viewport:v,path,map}=active;c.zoom=path==='tech'?.85:.8;const target=path==='tech'?{x:470,y:450}:path==='cultivation'?{x:810,y:2040}:map.root;c.x=v.clientWidth/2-target.x*c.zoom;c.y=v.clientHeight/2-target.y*c.zoom;c.initialized=true;update();}
+  function reset(){if(!active)return;stopMotion();const {camera:c,viewport:v,path,map}=active;c.zoom=.8;const target={x:map.root.x,y:map.root.y-320};c.x=v.clientWidth/2-target.x*c.zoom;c.y=v.clientHeight/2-target.y*c.zoom;c.initialized=true;update();}
   function reveal(id,center=true){if(!active)return;const n=active.map.nodes.find(n=>n.id===id);if(!n)return;const {camera:c,viewport:v}=active;const x=n.x*c.zoom+c.x,y=n.y*c.zoom+c.y;if(center||x<80||x>v.clientWidth-80||y<70||y>v.clientHeight-80){const next=Math.max(c.zoom,center?.85:c.zoom);move({zoom:next,x:v.clientWidth/2-n.x*next,y:v.clientHeight/2-n.y*next});}}
   function highlight(branch,search,selected){if(!active)return;active.viewport.querySelectorAll('.tree-node').forEach(el=>{const n=active.map.nodes.find(n=>n.id===el.dataset.id),match=(!search||n.name.includes(search)||FocusData.branchNames[active.path][n.branch].includes(search))&&(branch==='all'||n.branch===branch);el.classList.toggle('dimmed',!match);el.classList.toggle('selected',n.id===selected);el.classList.toggle('search-match',!!search&&match);});const chain=new Set();let n=active.map.nodes.find(n=>n.id===selected);while(n){chain.add(n.id);n=active.map.nodes.find(p=>p.id===n.parent);}active.plane.querySelectorAll('.tree-link').forEach(el=>el.classList.toggle('route',chain.has(el.dataset.edge)));}
   return {layout,render,mount,zoom,fit,reset,reveal,highlight};

@@ -7,7 +7,8 @@ assert.equal(new Set(D.skills.map(s=>s.id)).size,324);
 assert.equal(new Set(D.skills.map(s=>s.name)).size,324);
 for (const path of Object.keys(D.paths)) for(let branch=0;branch<6;branch++) {
   const nodes=D.skills.filter(s=>s.path===path&&s.branch===branch);assert.equal(nodes.length,18);
-  for(let i=1;i<nodes.length;i++)assert.equal(nodes[i].parent,nodes[i-1].id);
+  for(let i=1;i<nodes.length;i++)assert.equal(nodes[i].parent,nodes[i===12&&!(branch===0&&path!=='arcane')?5:i-1].id);
+  const children=nodes.filter(n=>n.parent===nodes[5].id);assert.equal(children.length,branch===0&&path!=='arcane'?1:2,'real progression fork');
 }
 assert.equal(D.jobs.length,9);assert.equal(D.regions.length,8);assert.equal(D.equipment.length,12);
 const full=fresh();full.points=100000;full.xp=40000;
@@ -51,4 +52,5 @@ E.completeTask(gear,gear.tasks[0].id,time);assert.equal(E.claim(gear,'first-task
 assert.equal(E.claim(gear,'first-task',time).ok,false);
 for(const bad of [{}, {version:1,tasks:[],days:{},xp:-1}, {...fresh(),focus:{goal:60,seconds:70}}])assert.throws(()=>E.restore(bad,time));
 const roundtrip=E.restore(JSON.parse(JSON.stringify(job)),time);assert.equal(roundtrip.job,'swordsman');assert.equal(roundtrip.points,job.points);
+const legacy=fresh();legacy.skills={'tech-2-11':1,'tech-2-12':1,'cultivation-0-17':1};assert.deepEqual(E.restore(legacy,time).skills,legacy.skills);
 console.log('PASS: 324 unique nodes, prerequisites, one-time task rewards, focus pause/resume/settlement, reload, midnight, offline materials, jobs, equipment, achievements and invalid saves.');

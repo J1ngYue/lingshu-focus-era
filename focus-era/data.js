@@ -46,7 +46,7 @@ var FocusData = (() => {
     const prefix=path==='tech'?`文明设施 · ${branchNames[path][branch]}`:path==='cultivation'?`修行层次 · ${branchNames[path][branch]}`:`法术技能 · ${branchNames[path][branch]}`;
     return {id:`${path}-${branch}-${step}`,path,branch,step,tier:Math.floor(step/3),column:branch,name,
       description:`${prefix}。${effectText[effect]} +${percentage?Math.round(value*1000)/10+'%':value}。${path==='tech'&&step%3===0?'推动营地设施升级。':''}`,
-      effect,value,icon,max:1,level:Math.max(1,step*2-1),cost:15+step*12+Math.floor(step/6)*15,parent:step?`${path}-${branch}-${step-1}`:null};
+      effect,value,icon,max:1,level:Math.max(1,step*2-1),cost:15+step*12+Math.floor(step/6)*15,parent:step?`${path}-${branch}-${step===12&&!(branch===0&&path!=='arcane')?5:step-1}`:null};
   })));
   const jobs = [
     { id: 'engineer', name: '灵械师', path: 'tech', tier: 1, level: 3, cost: 45, requires: {tech: 1}, icon: 'cpu', description: '机关与灵能的初次共鸣', bonus: {atk: 8, def: 3} },

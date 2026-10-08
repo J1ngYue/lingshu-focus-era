@@ -2,5 +2,7 @@
 output/
 *.zip
 node_modules/
+assets/pixel/dungeon/
+assets/pixel/kyrise/
 assets/illustrated/*
 !assets/illustrated/frame.png
