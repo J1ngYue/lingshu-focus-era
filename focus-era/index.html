@@ -4,14 +4,15 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f2e9"><meta name="description" content="把认真生活的每一天，变成科技、修仙与术法世界的成长。">
   <title>灵枢 · 专注纪元</title>
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="game.css">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="game.css"><link rel="stylesheet" href="polish.css">
   <script src="data.js" defer></script><script src="engine.js" defer></script><script src="models.js" defer></script><script src="scene.js" defer></script><script src="tree.js" defer></script><script src="app.js" defer></script>
 </head>
 <body>
   <canvas id="game-world" class="world-canvas" aria-label="实时 3D 角色、营地和怪兽的自动战斗场景"></canvas>
   <div class="world-vignette" aria-hidden="true"></div>
   <header class="game-hud"><button class="player-plaque" data-action="navigate" data-view="jobs" aria-label="查看角色与转职"><img src="assets/portraits/Knight.webp" alt=""><span><strong id="hud-name">小灵</strong><small id="hud-realm">三道学徒 · 凡人初心</small><span class="progress"><span id="hud-xp"></span></span></span><b id="hud-level">1</b></button>
-    <div class="game-logo"><img src="assets/icon.svg" alt=""><span>灵枢<small>专 注 纪 元</small></span></div>
+    <div class="game-logo"><img src="assets/icon.svg" alt=""><span>灵枢<small>每一次专注，都是一次成长</small></span></div>
+    <button class="back-home" id="back-home" data-action="navigate" data-view="home" hidden>← 返回营地 <kbd>Esc</kbd></button>
     <div class="resource-hud"><span title="完成事项与专注获得">✦ <b id="hud-points">20</b><small>灵感</small></span><span title="挂机收集锻造材料">◆ <b id="hud-coins">40</b><small>灵石</small></span><span>✧ <b id="hud-shards">0</b><small>星屑</small></span><button class="icon-button" data-action="quiet" aria-label="切换静心模式" title="静心模式" id="quiet-button"></button><button class="icon-button" data-action="fullscreen" aria-label="全屏游戏" title="全屏游戏">⛶</button><button class="icon-button" data-action="navigate" data-view="settings" aria-label="修行设置" id="settings-nav"></button></div>
   </header>
   <main id="content" tabindex="-1"></main>
