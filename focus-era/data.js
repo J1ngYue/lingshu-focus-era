@@ -62,13 +62,13 @@ var FocusData = (() => {
   const realms = ['练气初境','练气圆满','筑基境','金丹境','元婴境','化神境','渡劫境','太虚境'];
   const regions = [
     {name:'青苔原野',sub:'第一个认真学习的地方',level:1,palette:['#cae4bf','#b4d3a7','#7da783','#8bbcc3'], monsters:['苔灵史莱姆','迷途小妖','藤蔓精'], boss:'古木守望者',hp:38,atk:5,sprites:[109,110,111,113]},
-    {name:'灵雾竹海',sub:'在宁静中磨炼心性',level:3,palette:['#b4d8c3','#a0c9b4','#6d9d85','#8ac9c5'],monsters:['竹叶妖','幽雾狐','青玉螳'],boss:'千年竹灵',hp:90,atk:11,sprites:[112,114,115,116]},
-    {name:'赤铜工坊',sub:'灵能机械开始苏醒',level:5,palette:['#e1c69e','#ceb282','#a58260','#91bfc4'],monsters:['失控齿轮','铜甲卫兵','磁能飞虫'],boss:'蒸汽巨像',hp:160,atk:17,sprites:[117,118,119,120]},
-    {name:'月影遗迹',sub:'古老符文藏着新的答案',level:8,palette:['#ccd0e6','#b6bdd6','#8b92b2','#a1bdde'],monsters:['月影幽灵','符文蝙蝠','镜界傀儡'],boss:'月蚀祭司',hp:280,atk:25,sprites:[111,115,122,121]},
-    {name:'雷霆浮岛',sub:'越过风暴，触及天空',level:12,palette:['#bcd9df','#a5c9d1','#719ca8','#b6c9e7'],monsters:['雷云兽','苍翼龙','风灵使'],boss:'雷霆龙王',hp:460,atk:35,sprites:[123,124,125,126]},
-    {name:'星核熔炉',sub:'让科技与仙术一起燃烧',level:16,palette:['#e3c8bd','#d4b09f','#af7f72','#ddb89c'],monsters:['熔岩蛞蝓','火核机兵','赤焰魔灵'],boss:'星核泰坦',hp:700,atk:46,sprites:[118,120,121,127]},
-    {name:'太虚秘境',sub:'心流尽处，万象初生',level:20,palette:['#d8cae9','#c4b3dc','#9c88b5','#bbd0e5'],monsters:['虚空游灵','梦境织者','道纹异兽'],boss:'太虚观测者',hp:1000,atk:58,sprites:[124,122,125,128]},
-    {name:'三界交汇',sub:'属于长期坚持者的终点',level:25,palette:['#d9dbc3','#c5cba6','#a3ac82','#a2c3be'],monsters:['混沌守卫','时空裂兽','万象之影'],boss:'三界之主',hp:1450,atk:72,sprites:[126,127,128,129]}
+    {name:'青岚仙机城',sub:'在宁静中磨炼心性',level:3,palette:['#b4d8c3','#a0c9b4','#6d9d85','#8ac9c5'],monsters:['竹叶妖','幽雾狐','青玉螳'],boss:'千年竹灵',hp:90,atk:11,sprites:[112,114,115,116]},
+    {name:'灵能都市',sub:'灵能机械开始苏醒',level:5,palette:['#e1c69e','#ceb282','#a58260','#91bfc4'],monsters:['失控齿轮','铜甲卫兵','磁能飞虫'],boss:'蒸汽巨像',hp:160,atk:17,sprites:[117,118,119,120]},
+    {name:'月华仙宫',sub:'古老符文藏着新的答案',level:8,palette:['#ccd0e6','#b6bdd6','#8b92b2','#a1bdde'],monsters:['月影幽灵','符文蝙蝠','镜界傀儡'],boss:'月蚀祭司',hp:280,atk:25,sprites:[111,115,122,121]},
+    {name:'云海浮岛',sub:'越过风暴，触及天空',level:12,palette:['#bcd9df','#a5c9d1','#719ca8','#b6c9e7'],monsters:['雷云兽','苍翼龙','风灵使'],boss:'雷霆龙王',hp:460,atk:35,sprites:[123,124,125,126]},
+    {name:'星核熔炉城',sub:'让科技与仙术一起燃烧',level:16,palette:['#e3c8bd','#d4b09f','#af7f72','#ddb89c'],monsters:['熔岩蛞蝓','火核机兵','赤焰魔灵'],boss:'星核泰坦',hp:700,atk:46,sprites:[118,120,121,127]},
+    {name:'太虚仙境',sub:'心流尽处，万象初生',level:20,palette:['#d8cae9','#c4b3dc','#9c88b5','#bbd0e5'],monsters:['虚空游灵','梦境织者','道纹异兽'],boss:'太虚观测者',hp:1000,atk:58,sprites:[124,122,125,128]},
+    {name:'三界天枢城',sub:'属于长期坚持者的终点',level:25,palette:['#d9dbc3','#c5cba6','#a3ac82','#a2c3be'],monsters:['混沌守卫','时空裂兽','万象之影'],boss:'三界之主',hp:1450,atk:72,sprites:[126,127,128,129]}
   ];
   const equipment = ['初阶','精良','史诗','传说'].flatMap((quality, tier) => [
     {id:`weapon-${tier}`,slot:'weapon',name:['竹锋短剑','灵能光刃','雷纹仙剑','星河裁决'][tier],quality,tier,icon:'sword',level:[1,4,9,16][tier],cost:[30,100,280,650][tier],shards:[0,2,6,15][tier],bonus:{atk:[5,14,32,65][tier]}},

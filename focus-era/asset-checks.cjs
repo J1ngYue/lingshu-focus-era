@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=__dirname,D=require('./data.js'),E=require('./engine.js'),P=require('./pixel-data.js');
-global.FocusData=D;global.FocusEngine=E;global.FocusPixels=P;
+global.FocusData=D;global.FocusEngine=E;global.FocusPixels=P;global.FocusArt=require('./ink-art.js');
 const Tree=require('./tree.js'),state=E.create();
 function png(relative,w,h){const b=fs.readFileSync(path.join(root,relative));assert.equal(b.subarray(1,4).toString(),'PNG',relative);if(w)assert.equal(b.readUInt32BE(16),w);if(h)assert.equal(b.readUInt32BE(20),h);return b;}
 const iconHashes=new Set();
@@ -18,7 +18,7 @@ for(const treePath of Object.keys(D.paths)){
  const html=Tree.render(treePath,state,()=>'',s=>s,graph.nodes[0].id);
  assert.equal((html.match(/data-action="select-node"/g)||[]).length,108);
  assert.equal((html.match(/data-edge=/g)||[]).length,216);
- assert.equal((html.match(/class="node-pixel"/g)||[]).length,108);
+ assert.equal((html.match(/class="node-ink"/g)||[]).length,108);
 }
 assert.equal(iconHashes.size,324,'every node needs its own identifiable icon');
 const atlas=png(P.atlas),aw=atlas.readUInt32BE(16),ah=atlas.readUInt32BE(20);
@@ -28,6 +28,11 @@ for(const name of [...Object.keys(P.roles),...Object.keys(P.actors)])png('assets
 for(let i=0;i<8;i++)png('assets/pixel/town-'+i+'.png');
 for(const f of fs.readdirSync(path.join(root,'assets/pixel/ui')))png('assets/pixel/ui/'+f,16,16);
 const licenses=fs.readFileSync(path.join(root,'assets/pixel/LICENSES.md'),'utf8');assert.match(licenses,/0x72/);assert.match(licenses,/CC0/);assert.match(licenses,/Kyrise/);assert.match(licenses,/CC BY 4.0/);assert.match(licenses,/changed/);
-const html=fs.readFileSync(path.join(root,'index.html'),'utf8');assert.ok(!/src="(?:models|scene)\.js"/.test(html),'legacy WebGL model bundles are still loaded');assert.match(html,/pixel-scene.js/);
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');assert.ok(!/src="(?:models|scene)\.js"/.test(html),'legacy WebGL model bundles are still loaded');assert.match(html,/ink-scene.js/);assert.ok(!/src="pixel-(?:data|scene)\.js"/.test(html));
 const shared=require('./combat-motion.cjs'),pixel=require('./pixel-motion.js');for(let t=0;t<2;t+=.013)for(const ranged of [false,true])for(const lethal of [false,true])assert.deepEqual(pixel.sampleCombat(t,ranged,lethal),shared.sampleCombat(t,ranged,lethal));
 console.log(`PASS: 324 connected, branching nodes with 324 unique pixel icons; ${Object.keys(P.rects).length} atlas frames, idle/run animation, 35 portraits, 8 terrains, attribution, offline entry and shared motion.`);
+
+for(const name of ['forest','scholar-city','metro','moon-palace','sky-isles','forge','void-palace','celestial-city']){const b=png('assets/ink/'+name+'.png');assert.ok(b.readUInt32BE(16)>=1200,'landscape too small');}
+for(const role of ['Knight','Mage','Rogue_Hooded'])for(const pose of ['idle','attack','hurt'])png('assets/ink/'+role+'-'+pose+'.png',480,360);
+for(const monster of ['slime','goblin','skeleton','demon','wolf','treant','ghost','dragon'])png('assets/ink/'+monster+'.png',480,400);
+console.log('PASS: 8 illustrated region maps, 9 xianxia hero poses, 8 monsters, ink entry and 324 growth icons.');
