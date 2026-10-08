@@ -1,0 +1,50 @@
+/* Content-specific seals and feedback; outer map-node transforms stay untouched. */
+.tree-node .node-ink>.node-glyph{width:48px;height:48px;max-width:none}
+.tree-node.locked{background:radial-gradient(#ddd4b6,#bbb493);border:0;box-shadow:0 0 0 3px #938d70,0 0 0 5px #5b605033,inset 0 0 0 3px #efdfb688,0 4px 4px #61583833}
+.tree-node.available{background:radial-gradient(#e6daa7,#c2ad77);border:0;box-shadow:0 0 0 3px #a5864c,0 0 0 6px #d7b66144}
+.tree-node.learned{background:radial-gradient(#d7dfc2,#9dad91);border:0;box-shadow:0 0 0 3px #5f8267,0 0 0 5px #465c4933}
+.tree-link.ready,.tree-link.route{stroke-dasharray:none}
+.node-ink i{top:-3px;bottom:auto;right:-3px;font-size:8px;background:#566451;border:1px solid #cabc92;padding:0 3px}
+.tree-node:hover .node-seal{scale:1.08}.tree-node .node-seal{transition:scale .18s ease}
+.tree-node:active{translate:0 0}.tree-node:focus-visible{outline:3px solid #fff0b7;outline-offset:8px}
+.tree-node.context-node{opacity:.78}.tree-node.next-step .map-node-name{border-color:#ad9861;border-width:2px}
+.branch-controls button,.tree-tools button{display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.branch-controls button{color:#675637;padding:6px 8px}.branch-controls button .ink-icon{width:17px;height:17px;flex-shrink:0}
+.tree-tools button .ink-icon{width:18px;height:18px}.tree-tools button{color:#5b4a2d}
+.tree-search-wrap>svg{position:absolute;width:17px;height:17px;left:9px;top:50%;translate:0 -50%;pointer-events:none}
+.tree-search-wrap input{padding-left:31px;color:#5b503e}.search-results button{display:grid;grid-template-columns:29px 1fr auto;align-items:center;gap:8px}
+.search-results button .node-ink{width:29px;height:29px}.search-results .node-ink i,.detail-chain .node-ink i{display:none}
+.search-results p{display:flex;align-items:center;gap:8px}.search-results p .ink-icon{width:20px;height:20px}
+.atlas-points>.ink-icon{width:24px;height:24px}.atlas-legend>span{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;color:#756140}
+.atlas-legend>span{width:auto;height:auto;min-width:max-content;border-radius:0;flex-shrink:0}
+.atlas-legend>span .ink-icon{width:13px;height:13px}.atlas-legend>span:first-child .ink-icon{color:#52705a}
+.detail-state{display:inline-flex;align-items:center;gap:6px;align-self:center}.detail-state .ink-icon{width:14px;height:14px}
+.detail-effect>span,.detail-requirements dt,.detail-chain>span,.detail-chain>p{display:flex;align-items:center;gap:6px}
+.detail-effect .ink-icon,.detail-requirements .ink-icon,.detail-chain>span .ink-icon,.detail-chain>p .ink-icon{width:17px;height:17px;flex-shrink:0}
+.detail-chain button{display:flex;align-items:center;gap:7px;min-height:40px;color:#665434}.detail-chain button>.node-ink{width:28px;height:28px;flex-shrink:0}
+.detail-chain button>span:not(.node-ink){flex:1;text-align:left}.detail-chain button>.ink-icon{width:15px;height:15px;margin-left:auto;flex-shrink:0}
+.detail-bottom .button .ink-icon{width:18px;height:18px}.detail-bottom p{color:#75603e}.detail-scroll .detail-description{color:#75603e}
+.tree-flow{fill:none;stroke:#f4de97;stroke-width:2.5;stroke-dasharray:9 27;pointer-events:none;opacity:0}
+.tree-flow.route{opacity:.9;animation:path-flow 1.6s linear infinite}.tree-link.edge-unlocked{animation:edge-awaken 1s ease-out}
+.tree-node.node-selected::after{content:'';position:absolute;inset:-9px;border:2px solid #efca79;border-radius:50%;pointer-events:none;animation:selection-ring .65s ease-out both}
+.tree-node.just-learned{animation:seal-awaken 1.1s ease-out}.detail-unlocked .detail-emblem{animation:seal-awaken 1s ease-out}
+.tap-wave,.unlock-ring,.unlock-mote,.unlock-callout{position:fixed;z-index:80;pointer-events:none;user-select:none}
+.tap-wave{width:20px;height:20px;border:2px solid #f4d49c;border-radius:50%;background:#f8e6b53b;translate:-50% -50%;animation:tap-wave .55s ease-out both}
+.unlock-ring{width:50px;height:50px;border:3px double #f2d594;border-radius:50%;translate:-50% -50%;animation:unlock-ring .85s ease-out both}
+.unlock-mote{width:7px;height:7px;background:#f8e5a3;box-shadow:0 0 8px #f5df9d;clip-path:polygon(50% 0,65% 35%,100% 50%,65% 65%,50% 100%,35% 65%,0 50%,35% 35%);animation:unlock-mote .85s ease-out both}
+.unlock-callout{padding:6px 12px;border:1px solid #cab274;background:#f0e0b9f0;box-shadow:0 3px 9px #48402c33;border-radius:4px;font-size:12px;font-weight:700;color:#48674f;translate:-50% -100%;white-space:nowrap;animation:unlock-callout 1.15s ease-out both}
+@keyframes path-flow{to{stroke-dashoffset:-72}}
+@keyframes edge-awaken{30%{stroke:#eed27f;stroke-width:10}to{stroke:#78966f;stroke-width:7}}
+@keyframes selection-ring{from{opacity:.9;scale:.88}to{opacity:0;scale:1.48}}
+@keyframes seal-awaken{20%{filter:brightness(1.35);box-shadow:0 0 0 8px #eed79488,0 0 32px #ebd48d88}to{filter:brightness(1)}}
+@keyframes tap-wave{from{opacity:.8;scale:.4}to{opacity:0;scale:3.3}}
+@keyframes unlock-ring{from{opacity:1;scale:.5}to{opacity:0;scale:2.6}}
+@keyframes unlock-mote{from{opacity:1;translate:-50% -50%;scale:.5}to{opacity:0;translate:var(--dx) var(--dy);scale:1.2}}
+@keyframes unlock-callout{0%{opacity:0;transform:translateY(8px)}20%,70%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
+body.quiet .tree-flow.route,body.quiet .entering,body.quiet .node-selected::after,body.quiet .just-learned,body.quiet .edge-unlocked,body.quiet .detail-unlocked .detail-emblem{animation:none!important}
+body.quiet .tree-flow.route{stroke-dasharray:none;opacity:.5}body.quiet button,body.quiet .node-seal{transition:none!important}
+body.quiet .tree-node:hover .node-seal{scale:1}
+body.quiet .tap-wave,body.quiet .unlock-ring,body.quiet .unlock-mote,body.quiet .unlock-callout{display:none}
+@media(prefers-reduced-motion:reduce){.tree-flow.route,.node-selected::after,.edge-unlocked,.detail-unlocked .detail-emblem{animation:none!important}.tree-flow.route{stroke-dasharray:none;opacity:.5}.tree-node .node-seal{transition:none}.tree-node:hover .node-seal{scale:1}.tap-wave,.unlock-ring,.unlock-mote,.unlock-callout{display:none}}
+@media(max-width:600px){.branch-controls button{font-size:9px;padding:4px 5px}.branch-controls button .ink-icon{width:13px;height:13px}.detail-chain>span,.detail-chain>p,.detail-requirements dt{display:none}.detail-state{align-self:start;justify-self:start}.tree-tools button{gap:3px}.tree-tools button .ink-icon{width:14px;height:14px}.search-results button{grid-template-columns:25px 1fr auto;gap:5px}.search-results button>span:last-child{font-size:9px}}
+@media(max-width:600px){.branch-controls{max-height:none;padding:8px 9px 5px;gap:4px}.tree-search-wrap{width:100%;margin:2px 0 0}.tree-search-wrap input{width:100%;min-height:30px}.game-dock .nav-button{width:auto;min-width:0;flex:1}.game-dock #navigation{width:100%}}
