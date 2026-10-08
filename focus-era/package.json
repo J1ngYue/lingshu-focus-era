@@ -1,1 +1,1 @@
-{"name":"lingshu-focus-era","version":"0.1.0","private":true,"description":"Offline learning idle RPG with 324 world, cultivation and magic nodes","scripts":{"test":"node checks.cjs"},"license":"UNLICENSED"}
+{"name":"lingshu-focus-era","version":"0.2.0","private":true,"description":"Offline learning idle RPG with 324 world, cultivation and magic nodes","scripts":{"build":"node build-game.cjs","test":"node checks.cjs && node asset-checks.cjs"},"license":"UNLICENSED","devDependencies":{"esbuild":"^0.28.2","three":"^0.186.1"}}

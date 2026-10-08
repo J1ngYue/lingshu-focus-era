@@ -1,0 +1,392 @@
+[
+  {
+    "name": "Knight",
+    "source": "kaykit",
+    "sourceSha256": "60428e3abc09ba83e595d256e3af8c5c976b46cdae599f0802fc82b4a3445168",
+    "bytes": 801420
+  },
+  {
+    "name": "Mage",
+    "source": "kaykit",
+    "sourceSha256": "cf898585da33fab50c724d31605fb931eb2912e6d2280092141e98ca81ad507d",
+    "bytes": 731896
+  },
+  {
+    "name": "Rogue_Hooded",
+    "source": "kaykit",
+    "sourceSha256": "93e6e25213009952276d9cf34f5d96a243767334c66f280db0433ddfabb91545",
+    "bytes": 740048
+  },
+  {
+    "name": "building_blacksmith_green",
+    "source": "environment",
+    "sourceSha256": "ee7259680436e24ce72619a96ae9f117d4c87a94e41048f064419d15c7c997ff",
+    "bytes": 140252
+  },
+  {
+    "name": "building_bridge_A",
+    "source": "environment",
+    "sourceSha256": "aa6d1da2ea6f530b04275a07c9ba83f4d3f771f19def7a75b12ef4e93d5b5ddc",
+    "bytes": 42732
+  },
+  {
+    "name": "building_castle_green",
+    "source": "environment",
+    "sourceSha256": "180b1fdb587d1043f45d1aabb443e7acd8e0ae116f2f229ecafc5a492c50940b",
+    "bytes": 334920
+  },
+  {
+    "name": "building_church_green",
+    "source": "environment",
+    "sourceSha256": "ef6c0d29dc67b63ee1269e17181fc96071e860b2bc35d3c05466926eea86bb66",
+    "bytes": 106944
+  },
+  {
+    "name": "building_grain",
+    "source": "environment",
+    "sourceSha256": "5ae91b9fa08dce1c0e1e27828a4c88b532521cb4f9073b3cd457b992cd146c5d",
+    "bytes": 30796
+  },
+  {
+    "name": "building_home_A_green",
+    "source": "environment",
+    "sourceSha256": "25f2cd93618299d4dad7608cba1e4192a9717c460c76942e7ff18a71db614c30",
+    "bytes": 72556
+  },
+  {
+    "name": "building_home_B_green",
+    "source": "environment",
+    "sourceSha256": "9c854f8bea8c87cbbf630d0ddedc25d7b9d282f8bdfab7b100fc7ea8c95711b5",
+    "bytes": 99328
+  },
+  {
+    "name": "building_watermill_green",
+    "source": "environment",
+    "sourceSha256": "5f71377275c2aef485c73d18cc32a7aa29b2f981d09c9b58a23e85a4fb1a429e",
+    "bytes": 129468
+  },
+  {
+    "name": "building_well_green",
+    "source": "environment",
+    "sourceSha256": "8066f9e636b4fe44ba907564755e4389340d8307bb4bd463a00c6c59b7e7652a",
+    "bytes": 59540
+  },
+  {
+    "name": "building_windmill_green",
+    "source": "environment",
+    "sourceSha256": "209ce8ceec2db85690deaf3ffbc7c3023e33034a5edf7e98cdcd1f9f1a038891",
+    "bytes": 160688
+  },
+  {
+    "name": "cloud_big",
+    "source": "environment",
+    "sourceSha256": "0f501b4109253ed322ace88ff0bd8fc46cd75d9eb1fb14ef10a4e120bfb4e478",
+    "bytes": 32016
+  },
+  {
+    "name": "hills_A",
+    "source": "environment",
+    "sourceSha256": "59ceea814775a3036e6f602490911c48e9c15e73b37b5bb76f9d664fbf915214",
+    "bytes": 39224
+  },
+  {
+    "name": "mountain_A_grass",
+    "source": "environment",
+    "sourceSha256": "d1661e4d20336f3e4326861f15500e50f88741ae13a586622d75b8e016489a1f",
+    "bytes": 32544
+  },
+  {
+    "name": "rock_single_A",
+    "source": "environment",
+    "sourceSha256": "bbd6c952d7f501f5d027930f5872e0c1461de28c98af5207ab5de188532b9673",
+    "bytes": 18380
+  },
+  {
+    "name": "rock_single_B",
+    "source": "environment",
+    "sourceSha256": "1e442aa4644e6f74cb7d945f5d30ef0eea9f0ecd6abaf98d4dfdde60f5a7c9a9",
+    "bytes": 18800
+  },
+  {
+    "name": "tree_single_A",
+    "source": "environment",
+    "sourceSha256": "114760248eb2a9598bd1a8e3fe538316a0fa5e4f23c0a6637c9efa8246b90919",
+    "bytes": 20516
+  },
+  {
+    "name": "tree_single_B",
+    "source": "environment",
+    "sourceSha256": "aa0d158fe857decfb51211bf4ce3fd51229dbcdee1c45fb3d2f5de55da044e3c",
+    "bytes": 24544
+  },
+  {
+    "name": "big-Alien",
+    "source": "monsters",
+    "sourceSha256": "ad0d960ff5a5aa1d84bf4fd3f5aea0a3e3e545950016c62734f16054d06abae9",
+    "bytes": 673476
+  },
+  {
+    "name": "big-BlueDemon",
+    "source": "monsters",
+    "sourceSha256": "9f0077fc809d6469e477d8dba19cb65e525a36c0fddf62654f35e91088b2c696",
+    "bytes": 604724
+  },
+  {
+    "name": "big-Demon",
+    "source": "monsters",
+    "sourceSha256": "d75832a857fa898ed655b5d788304203d083618e071095d99e183be949dbf51a",
+    "bytes": 660036
+  },
+  {
+    "name": "big-Dino",
+    "source": "monsters",
+    "sourceSha256": "31c56004e63f0a45791cae4cdbc9e63119708d5bdf233b85a103df3b1ec3271d",
+    "bytes": 610080
+  },
+  {
+    "name": "big-Monkroose",
+    "source": "monsters",
+    "sourceSha256": "e5572096723a0d0eb76acd94212d013a6c55fe2fc41b79bf94d1c92965dad058",
+    "bytes": 624692
+  },
+  {
+    "name": "big-MushroomKing",
+    "source": "monsters",
+    "sourceSha256": "ebea7dd858ab272beb8469b35be16ee5dce29f03b830ee76689ed278ced1515f",
+    "bytes": 620884
+  },
+  {
+    "name": "big-Orc_Skull",
+    "source": "monsters",
+    "sourceSha256": "e3e56bce854f987ad4db7f150ccbd94c993d4393d411ce7c8e5c8581744f0ee8",
+    "bytes": 676468
+  },
+  {
+    "name": "big-Tribal",
+    "source": "monsters",
+    "sourceSha256": "a5446dd0302ae273189e62a3e28036287c465413b3c664e660816e004140ed90",
+    "bytes": 696900
+  },
+  {
+    "name": "big-Yeti",
+    "source": "monsters",
+    "sourceSha256": "613b476c2cdb2cc833bf68a952f0ccc63ccc5ae873273dd510335cad02686ed7",
+    "bytes": 622288
+  },
+  {
+    "name": "blob-Alien",
+    "source": "monsters",
+    "sourceSha256": "d8e511b49e9afca2d68f5a13bc4bdbdbe119ad297f75cbc0aa74019ac891489f",
+    "bytes": 126060
+  },
+  {
+    "name": "blob-Cactoro",
+    "source": "monsters",
+    "sourceSha256": "5fbdda8ab000ac41fec212d0e841993d8f50ab98df2f47ef1d3b254b465d5a7f",
+    "bytes": 134140
+  },
+  {
+    "name": "blob-Cat",
+    "source": "monsters",
+    "sourceSha256": "bc297646f92a2f49a08446487f377c6da80704784ce84518893c313ee337f71c",
+    "bytes": 109452
+  },
+  {
+    "name": "blob-GreenBlob",
+    "source": "monsters",
+    "sourceSha256": "71e636feb6c6a96c8d282efba96d0f66798408ecc5a42428756943b5fcf9cf47",
+    "bytes": 87896
+  },
+  {
+    "name": "blob-GreenSpikyBlob",
+    "source": "monsters",
+    "sourceSha256": "b0c7c369dff68c2cf251ec77d49f3cb4b015ef412f6a32119d2e2765f1e006fc",
+    "bytes": 211160
+  },
+  {
+    "name": "blob-Mushnub",
+    "source": "monsters",
+    "sourceSha256": "cd036d3ca344548059506e75ab52b1c8c7c0fde1a0a8f751609582d5736c6e58",
+    "bytes": 77020
+  },
+  {
+    "name": "blob-Orc",
+    "source": "monsters",
+    "sourceSha256": "ddd89c3d6c0e0bb042d54c9642bb35c393a6774d054569b5ca54015b0be5e50a",
+    "bytes": 138064
+  },
+  {
+    "name": "blob-PinkBlob",
+    "source": "monsters",
+    "sourceSha256": "b8d32429bf1cbd3b07e5ff008bfc29c0a017873b1dd9c1baa9178fb4f99c269c",
+    "bytes": 69812
+  },
+  {
+    "name": "blob-Wizard",
+    "source": "monsters",
+    "sourceSha256": "e22e801ff27b5c5864990ece9eb1389d1be53a81aedb5e4b3f3fe040c6fcaa52",
+    "bytes": 98756
+  },
+  {
+    "name": "flying-Alpaking_Evolved",
+    "source": "monsters",
+    "sourceSha256": "ffe48bb0d79393de993db35368fc812a475ff11c9d489b625babfd7bf23ba831",
+    "bytes": 282084
+  },
+  {
+    "name": "flying-Armabee",
+    "source": "monsters",
+    "sourceSha256": "7999d3fb8ea9ca7510ca1ce7ec8e489d8e11439fa7878dcc945f4a9cce2da974",
+    "bytes": 170668
+  },
+  {
+    "name": "flying-Armabee_Evolved",
+    "source": "monsters",
+    "sourceSha256": "c69b29c9e5aa1b390263d2cf9d75711a15bb06dc1c1c4a4180e9eddbc8503001",
+    "bytes": 215892
+  },
+  {
+    "name": "flying-Dragon",
+    "source": "monsters",
+    "sourceSha256": "16936d24d0f26884419f176117ce029803e1c56af4807793f06a410c71a5d546",
+    "bytes": 268032
+  },
+  {
+    "name": "flying-Dragon_Evolved",
+    "source": "monsters",
+    "sourceSha256": "697e7c64c50f1dd05d1b16ec925efce09c680ff56f75bca33e734c03b351ad80",
+    "bytes": 555944
+  },
+  {
+    "name": "flying-Ghost",
+    "source": "monsters",
+    "sourceSha256": "11941d509905c7a1a5591bfc9a22185f2cffaea4af4844048c2fa157539edb09",
+    "bytes": 327808
+  },
+  {
+    "name": "flying-Ghost_Skull",
+    "source": "monsters",
+    "sourceSha256": "fbe206673f1e91a348176de7e6843289cd4339f9a1e79bf7f8d09abca2055834",
+    "bytes": 357208
+  },
+  {
+    "name": "flying-Glub",
+    "source": "monsters",
+    "sourceSha256": "91d5cb7c6c4c9d73508485bde967114d9c511a6ca383b3389a8ff30ac7875ed2",
+    "bytes": 179164
+  },
+  {
+    "name": "flying-Glub_Evolved",
+    "source": "monsters",
+    "sourceSha256": "6b142e4ccee6139ee0cad6260c20bffbd1c2e84cdd8d51c9814820c6ca06cf6c",
+    "bytes": 244324
+  },
+  {
+    "name": "flying-Goleling",
+    "source": "monsters",
+    "sourceSha256": "2e6124e673fa4e67ec2010b63044f3f4e73aba8ac6af24ce1e78c4f412b0f97c",
+    "bytes": 236516
+  },
+  {
+    "name": "flying-Goleling_Evolved",
+    "source": "monsters",
+    "sourceSha256": "86a8aef2377f7cc4989255b389a2469ed73cc18d1bbde1cd85a1bff6fb3f6617",
+    "bytes": 318484
+  },
+  {
+    "name": "flying-Hywirl",
+    "source": "monsters",
+    "sourceSha256": "c8ad19d78cc210fce715f30b2055b7dfb7abdd460b6bde9e0296daa5943e72e1",
+    "bytes": 324376
+  },
+  {
+    "name": "flying-Pigeon",
+    "source": "monsters",
+    "sourceSha256": "cfa5e67ef7b58e8792ea3778f6c231e344a185ddb26e8ac8d0d83d3172b7c751",
+    "bytes": 223832
+  },
+  {
+    "name": "flying-Squidle",
+    "source": "monsters",
+    "sourceSha256": "92994511eb810b8882aacaafbb1f5696b6ac0164575d01a55adc68e39f85154d",
+    "bytes": 429248
+  },
+  {
+    "name": "nature-campfire_stones",
+    "source": "nature-selected",
+    "sourceSha256": "54869db23243a3f4905bc00bd4cd93b1037b28556ab3ef93e7a893a093791e35",
+    "bytes": 17360
+  },
+  {
+    "name": "nature-flower_purpleA",
+    "source": "nature-selected",
+    "sourceSha256": "f6fc34c96a03420a74fe36d4c2d0ec88f15204fcad99cd1416c3c4ecb22e48c4",
+    "bytes": 7128
+  },
+  {
+    "name": "nature-flower_redA",
+    "source": "nature-selected",
+    "sourceSha256": "171930b7789ddbf735af3745576b5393750beb9133b9ff4a444bb6bb2986c020",
+    "bytes": 7120
+  },
+  {
+    "name": "nature-flower_yellowA",
+    "source": "nature-selected",
+    "sourceSha256": "8a3b08cd2ca411c21f9c581d5bda651d78b13c50cba45ad8fa0389398ead6d1d",
+    "bytes": 7136
+  },
+  {
+    "name": "nature-grass_large",
+    "source": "nature-selected",
+    "sourceSha256": "af49a595624abca7249824eeefb944d4baf974abeeb5b16110d175da3563d6cd",
+    "bytes": 18520
+  },
+  {
+    "name": "nature-grass_leafsLarge",
+    "source": "nature-selected",
+    "sourceSha256": "a68b9b3d9639afaeb4ace840d5a8e3f21ffc4e8afc1eab15566500fbb2bee3e3",
+    "bytes": 14004
+  },
+  {
+    "name": "nature-mushroom_redGroup",
+    "source": "nature-selected",
+    "sourceSha256": "29f02df0589dd2b09e8d2aff6a4662394dac5cfcf1fec701640dcbd6127e0802",
+    "bytes": 14976
+  },
+  {
+    "name": "nature-plant_bushDetailed",
+    "source": "nature-selected",
+    "sourceSha256": "2e0487020d68ccf664435db9d829c78ae00e6d2785ee3ec10b9f89cc70a10406",
+    "bytes": 10188
+  },
+  {
+    "name": "nature-tree_detailed",
+    "source": "nature-selected",
+    "sourceSha256": "c041daf2f0fb1d49e4325227cbcd58667adbe51e9b55e8c1f0a94b74cc521b3b",
+    "bytes": 31428
+  },
+  {
+    "name": "nature-tree_detailed_dark",
+    "source": "nature-selected",
+    "sourceSha256": "1e2211dc6483b1d8a32130c3441afa108d4075f0d851825620fba85d2dc6e5d7",
+    "bytes": 31432
+  },
+  {
+    "name": "nature-tree_oak",
+    "source": "nature-selected",
+    "sourceSha256": "d7fd8773674928c50c11b66d12c636d49bdcc15a8b1c7fbb98e6f63a3439a3f3",
+    "bytes": 14660
+  },
+  {
+    "name": "nature-tree_pineRoundA",
+    "source": "nature-selected",
+    "sourceSha256": "7dc9711f31585eafdcb965d0649c30af5e19f2def1955f7a915081d30759ef8e",
+    "bytes": 14504
+  },
+  {
+    "name": "nature-tree_pineTallA_detailed",
+    "source": "nature-selected",
+    "sourceSha256": "9ba6337460e718b8baf165b23c02f39455e3d5757b1911505410c46bc88a86b5",
+    "bytes": 10724
+  }
+]

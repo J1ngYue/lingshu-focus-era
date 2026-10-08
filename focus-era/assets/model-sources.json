@@ -1,0 +1,330 @@
+{
+  "models": [
+    {
+      "name": "Knight",
+      "target": "kaykit/Knight.glb",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0/main/addons/kaykit_character_pack_adventures/Characters/gltf/Knight.glb"
+    },
+    {
+      "name": "Mage",
+      "target": "kaykit/Mage.glb",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0/main/addons/kaykit_character_pack_adventures/Characters/gltf/Mage.glb"
+    },
+    {
+      "name": "Rogue_Hooded",
+      "target": "kaykit/Rogue_Hooded.glb",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0/main/addons/kaykit_character_pack_adventures/Characters/gltf/Rogue_Hooded.glb"
+    },
+    {
+      "name": "building_blacksmith_green",
+      "target": "environment/building_blacksmith_green.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/green/building_blacksmith_green.gltf"
+    },
+    {
+      "name": "building_bridge_A",
+      "target": "environment/building_bridge_A.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/neutral/building_bridge_A.gltf"
+    },
+    {
+      "name": "building_castle_green",
+      "target": "environment/building_castle_green.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/green/building_castle_green.gltf"
+    },
+    {
+      "name": "building_church_green",
+      "target": "environment/building_church_green.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/green/building_church_green.gltf"
+    },
+    {
+      "name": "building_grain",
+      "target": "environment/building_grain.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/neutral/building_grain.gltf"
+    },
+    {
+      "name": "building_home_A_green",
+      "target": "environment/building_home_A_green.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/green/building_home_A_green.gltf"
+    },
+    {
+      "name": "building_home_B_green",
+      "target": "environment/building_home_B_green.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/green/building_home_B_green.gltf"
+    },
+    {
+      "name": "building_watermill_green",
+      "target": "environment/building_watermill_green.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/green/building_watermill_green.gltf"
+    },
+    {
+      "name": "building_well_green",
+      "target": "environment/building_well_green.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/green/building_well_green.gltf"
+    },
+    {
+      "name": "building_windmill_green",
+      "target": "environment/building_windmill_green.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/buildings/green/building_windmill_green.gltf"
+    },
+    {
+      "name": "cloud_big",
+      "target": "environment/cloud_big.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/cloud_big.gltf"
+    },
+    {
+      "name": "hills_A",
+      "target": "environment/hills_A.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/hills_A.gltf"
+    },
+    {
+      "name": "mountain_A_grass",
+      "target": "environment/mountain_A_grass.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/mountain_A_grass.gltf"
+    },
+    {
+      "name": "rock_single_A",
+      "target": "environment/rock_single_A.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/rock_single_A.gltf"
+    },
+    {
+      "name": "rock_single_B",
+      "target": "environment/rock_single_B.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/rock_single_B.gltf"
+    },
+    {
+      "name": "tree_single_A",
+      "target": "environment/tree_single_A.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/tree_single_A.gltf"
+    },
+    {
+      "name": "tree_single_B",
+      "target": "environment/tree_single_B.gltf",
+      "url": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0/84fa4e91af6a88989be7c99e0891cede11f2ca38/addons/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/tree_single_B.gltf"
+    },
+    {
+      "name": "big-Alien",
+      "target": "monsters/big-Alien.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1rWF4Jo_G7-odDa5LfkQ0e2d9_p9pxb3W"
+    },
+    {
+      "name": "big-BlueDemon",
+      "target": "monsters/big-BlueDemon.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1mcxtHj9Aw1uu1FWYhl1rfPenuq3My-Z4"
+    },
+    {
+      "name": "big-Demon",
+      "target": "monsters/big-Demon.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1XhBLnR6tjqIrFy0AUfRlqKf-hYmVwIR4"
+    },
+    {
+      "name": "big-Dino",
+      "target": "monsters/big-Dino.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1xBAObQmJQP1kCslielMmS_KMfPZUsdNm"
+    },
+    {
+      "name": "big-Monkroose",
+      "target": "monsters/big-Monkroose.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1EhDGjdMRdNZA52otQt73a0x3VpiunwOP"
+    },
+    {
+      "name": "big-MushroomKing",
+      "target": "monsters/big-MushroomKing.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1sCGed1ce1CrdCdFz5bxVQMqphu5e3a1m"
+    },
+    {
+      "name": "big-Orc_Skull",
+      "target": "monsters/big-Orc_Skull.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=13wbbztVj_2eYyF5lavumLvK9JyCfQEhI"
+    },
+    {
+      "name": "big-Tribal",
+      "target": "monsters/big-Tribal.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1hWEwACHKMfDzYbqG2Cum3KP6semUY_Ap"
+    },
+    {
+      "name": "big-Yeti",
+      "target": "monsters/big-Yeti.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1_skNq11VXoaGPu9D-hHb4-0OQXEWNTzY"
+    },
+    {
+      "name": "blob-Alien",
+      "target": "monsters/blob-Alien.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1DY3eAtSljj-Iiww1Q2kWnj7t25L1Wx8F"
+    },
+    {
+      "name": "blob-Cactoro",
+      "target": "monsters/blob-Cactoro.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1zkRgEGD59pniSqIWt4ycEU4CR0wPop7u"
+    },
+    {
+      "name": "blob-Cat",
+      "target": "monsters/blob-Cat.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1DaLGZYClS3GTBHVP3F6tF3mVjQ4-rTc-"
+    },
+    {
+      "name": "blob-GreenBlob",
+      "target": "monsters/blob-GreenBlob.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1Qj3EPCAzN7P3KNrfjV_sFMw98nsBUyob"
+    },
+    {
+      "name": "blob-GreenSpikyBlob",
+      "target": "monsters/blob-GreenSpikyBlob.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=125zPNBLl1VAgzhfVom9Kj29hSClaZhjF"
+    },
+    {
+      "name": "blob-Mushnub",
+      "target": "monsters/blob-Mushnub.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1bNqyLU2o3FbQueRyaHFuhxN_XEGosnwo"
+    },
+    {
+      "name": "blob-Orc",
+      "target": "monsters/blob-Orc.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=154RnrgtkqQ_KgMhRS-Jiz7WeiSdcq4EQ"
+    },
+    {
+      "name": "blob-PinkBlob",
+      "target": "monsters/blob-PinkBlob.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1KcjhxeBkIhsdm_lMKY-OcTmsKDQt3uoK"
+    },
+    {
+      "name": "blob-Wizard",
+      "target": "monsters/blob-Wizard.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1lkfBVrpoKi3JwrkJ3M_vwi7tQXG53RjV"
+    },
+    {
+      "name": "flying-Alpaking_Evolved",
+      "target": "monsters/flying-Alpaking_Evolved.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=11ns6AbnnC6WtC7zzrSPEWJkwQG_h0rQN"
+    },
+    {
+      "name": "flying-Armabee",
+      "target": "monsters/flying-Armabee.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1k7LbRse-00nyMQhTdJMvebPp8B-05hcG"
+    },
+    {
+      "name": "flying-Armabee_Evolved",
+      "target": "monsters/flying-Armabee_Evolved.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=196ay2r-nuDXcRiwYu84CoE7Qy_gBj8sB"
+    },
+    {
+      "name": "flying-Dragon",
+      "target": "monsters/flying-Dragon.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1-mQSm6_oGt7-EEQfNj1dFWYgPQy4AdPC"
+    },
+    {
+      "name": "flying-Dragon_Evolved",
+      "target": "monsters/flying-Dragon_Evolved.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1Mcfuavq7F4itG9xhqc-20_IL257ZY2_3"
+    },
+    {
+      "name": "flying-Ghost",
+      "target": "monsters/flying-Ghost.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1rUs1QRA9v1Y2wRYEXsfteBisTsz4JlLi"
+    },
+    {
+      "name": "flying-Ghost_Skull",
+      "target": "monsters/flying-Ghost_Skull.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1JIw8lx6H5IIhf_3Z5FprEu_yCoMcoRN7"
+    },
+    {
+      "name": "flying-Glub",
+      "target": "monsters/flying-Glub.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1X-6f4qyrbloGVq3wf-IdxUgmuA0u1JGu"
+    },
+    {
+      "name": "flying-Glub_Evolved",
+      "target": "monsters/flying-Glub_Evolved.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1WyNv3hlbY4gIxzbm3sFyn8MzBORQHCIr"
+    },
+    {
+      "name": "flying-Goleling",
+      "target": "monsters/flying-Goleling.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1bVAbwxtJhLOBpuJNtl3XBbJhl4cDPdcL"
+    },
+    {
+      "name": "flying-Goleling_Evolved",
+      "target": "monsters/flying-Goleling_Evolved.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1DXqke-QxMth9mq5eYiawcmJDACm4-jvL"
+    },
+    {
+      "name": "flying-Hywirl",
+      "target": "monsters/flying-Hywirl.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1LJG8sJYUwdoF7zrzPbEO-Vt9Xt7MQCu-"
+    },
+    {
+      "name": "flying-Pigeon",
+      "target": "monsters/flying-Pigeon.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1m5PJFA3ytir_ES3nPq0HC8UmCynHIzZY"
+    },
+    {
+      "name": "flying-Squidle",
+      "target": "monsters/flying-Squidle.gltf",
+      "url": "https://drive.google.com/uc?export=download&id=1VbcCYeqrlwYF6b64EY2S_e9hV0HXMr3O"
+    },
+    {
+      "name": "nature-campfire_stones",
+      "target": "nature-selected/nature-campfire_stones.glb",
+      "archiveEntry": "Models/GLTF format/campfire_stones.glb"
+    },
+    {
+      "name": "nature-flower_purpleA",
+      "target": "nature-selected/nature-flower_purpleA.glb",
+      "archiveEntry": "Models/GLTF format/flower_purpleA.glb"
+    },
+    {
+      "name": "nature-flower_redA",
+      "target": "nature-selected/nature-flower_redA.glb",
+      "archiveEntry": "Models/GLTF format/flower_redA.glb"
+    },
+    {
+      "name": "nature-flower_yellowA",
+      "target": "nature-selected/nature-flower_yellowA.glb",
+      "archiveEntry": "Models/GLTF format/flower_yellowA.glb"
+    },
+    {
+      "name": "nature-grass_large",
+      "target": "nature-selected/nature-grass_large.glb",
+      "archiveEntry": "Models/GLTF format/grass_large.glb"
+    },
+    {
+      "name": "nature-grass_leafsLarge",
+      "target": "nature-selected/nature-grass_leafsLarge.glb",
+      "archiveEntry": "Models/GLTF format/grass_leafsLarge.glb"
+    },
+    {
+      "name": "nature-mushroom_redGroup",
+      "target": "nature-selected/nature-mushroom_redGroup.glb",
+      "archiveEntry": "Models/GLTF format/mushroom_redGroup.glb"
+    },
+    {
+      "name": "nature-plant_bushDetailed",
+      "target": "nature-selected/nature-plant_bushDetailed.glb",
+      "archiveEntry": "Models/GLTF format/plant_bushDetailed.glb"
+    },
+    {
+      "name": "nature-tree_detailed",
+      "target": "nature-selected/nature-tree_detailed.glb",
+      "archiveEntry": "Models/GLTF format/tree_detailed.glb"
+    },
+    {
+      "name": "nature-tree_detailed_dark",
+      "target": "nature-selected/nature-tree_detailed_dark.glb",
+      "archiveEntry": "Models/GLTF format/tree_detailed_dark.glb"
+    },
+    {
+      "name": "nature-tree_oak",
+      "target": "nature-selected/nature-tree_oak.glb",
+      "archiveEntry": "Models/GLTF format/tree_oak.glb"
+    },
+    {
+      "name": "nature-tree_pineRoundA",
+      "target": "nature-selected/nature-tree_pineRoundA.glb",
+      "archiveEntry": "Models/GLTF format/tree_pineRoundA.glb"
+    },
+    {
+      "name": "nature-tree_pineTallA_detailed",
+      "target": "nature-selected/nature-tree_pineTallA_detailed.glb",
+      "archiveEntry": "Models/GLTF format/tree_pineTallA_detailed.glb"
+    }
+  ],
+  "natureArchive": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip"
+}

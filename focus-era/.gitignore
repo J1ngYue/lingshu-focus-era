@@ -1,3 +1,6 @@
 .userdata/
 output/
 *.zip
+node_modules/
+assets/illustrated/*
+!assets/illustrated/frame.png

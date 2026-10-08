@@ -1,0 +1,6 @@
+# Three.js embeds upstream GLSL; preserve its generated whitespace.
+scene.js -whitespace
+# The offline GLB bundle is generated binary data encoded as JavaScript.
+models.js -diff
+# Keep the creators' license files byte-for-byte.
+assets/licenses/* -text -whitespace

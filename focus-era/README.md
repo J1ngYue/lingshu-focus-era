@@ -1,6 +1,6 @@
 # 灵枢 · 专注纪元
 
-一个用来督促学习、完成今日事项的本地离线挂机游戏。米色界面与温暖像素世界，无账号、无付费、无联网依赖。
+一个用来督促学习、完成今日事项的本地离线挂机游戏。米色游戏界面、卡通 3D 营地、骨骼动画角色与怪兽，无账号、无付费、无联网依赖。
 
 ## 打开
 
@@ -20,7 +20,7 @@
 | 修仙悟道 | 境界突破、剑意、枪意、刀意、炼体、神识 | 境界独立从引气入体推进至金仙境，武器意境与体魄/神识分支独立参悟；提高角色属性和学习增益 |
 | 术法技能 | 赤焰、寒霜、雷霆、青木、星辰、时空 | 108 个命名法术永久生效；每三次攻击自动轮换施法，火/雷/星强化伤害、冰/时空降低伤害、木系恢复生命 |
 
-节点有明确前置、角色等级及灵感消耗。分支视图、全部视图和名称搜索都可用。等级来自学习经验，修仙境界由参悟对应境界节点推进。
+节点有明确前置、角色等级及灵感消耗。科技图按时代横向展开；修仙图以境界为中央纵向主脉，剑、枪、刀、炼体与神识独立；术法图采用六系星盘。可拖动平移、滚轮或按钮缩放、搜索定位、聚焦分支、查看全图、点击小地图，方向键也可移动。点选只查看，详情按钮确认后才消耗灵感。等级来自学习经验，修仙境界由参悟对应境界节点推进。
 
 此外包含 9 种可转职职业、8 个探索地区、24 种普通怪兽与 8 位首领、12 件四品质装备、12 项成就、怪兽图鉴、七日学习统计与专注记录。
 
@@ -43,10 +43,26 @@
 
 ## 美术素材
 
-本版为 **2D 像素精灵与地图**。美术来自 Kenney 官方的 [Tiny Town](https://kenney.nl/assets/tiny-town)、[Tiny Dungeon](https://kenney.nl/assets/tiny-dungeon)、[Tiny Battle](https://kenney.nl/assets/tiny-battle)。三个素材包均为 CC0，许可证保留在 `assets/kenney/*/License.txt`。世界布局、系统内容、界面与标志为本项目制作。
+本版采用真实 **3D 非像素模型**，包含 3 个职业角色、32 个独立怪兽模型、建筑、植被、山地与云朵，共 65 个本地模型。角色播放待机、攻击和倒地等骨骼动画；图鉴与头像从相同模型生成。营火、农田、水轮、风车、锻造坊、城镇等设施按对应科技节点显示。
+
+| 实际使用的素材 | 作者 / 来源 | 许可 |
+| --- | --- | --- |
+| Knight、Mage、Rogue_Hooded | [KayKit Adventurers 1.0](https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0) | CC0 |
+| 营地建筑与地形 | [KayKit Medieval Hexagon 1.0](https://github.com/KayKit-Game-Assets/KayKit-Medieval-Hexagon-Pack-1.0) | CC0 |
+| 32 个动画怪兽 | [Quaternius Ultimate Monsters](https://quaternius.com/packs/ultimatemonsters.html) | CC0 |
+| 树木、草丛、花、蘑菇与营火 | [Kenney Nature Kit](https://kenney.nl/assets/nature-kit) | CC0 |
+| 卷轴装饰边框 | [Kenney Fantasy UI Borders](https://kenney.nl/assets/fantasy-ui-borders) | CC0 |
+
+作者许可证保留在 `assets/licenses/`。Three.js 使用 MIT 授权并随程序打包。世界布局、三道图谱、系统内容与界面为本项目制作。美术调研见 `美术参考.md`。旧版未使用下载素材保留，运行时不加载。
 
 ## 验证与实现
 
-零第三方运行依赖，HTML/CSS/JavaScript，可直接通过 `file:///` 运行。核心逻辑与界面分开，便于验证计时与奖励。运行 `node checks.cjs` 检查节点数/唯一性、全节点可达、前置关系、任务奖励一次性、暂停/续计、关闭重载、跨午夜、离线材料、转职、装备、成就及坏档拒绝。实际浏览器验收覆盖见 `QA.md` 和 `验证结果.md`。
+HTML/CSS/JavaScript，可直接通过 `file:///` 运行，无服务器或外部 CDN。模型与纹理嵌入 `models.js`，Three.js 打包进 `scene.js`；首次打开解码本地模型，需要支持 WebGL 的现代浏览器。场景在营地最多 30 帧/秒，菜单降至 10 帧，静心模式降至 6 帧，减少学习时的资源占用。
+
+核心逻辑与界面分开。运行 `node checks.cjs` 检查节点、前置、奖励、计时、跨日、离线材料、转职、装备、成就与坏档；运行 `node asset-checks.cjs` 检查连线图、模型、动画、头像、纹理嵌入与许可。浏览器验收见 `QA.md` 和 `验证结果.md`。旧版存档键、节点标识和核心学习逻辑保留，用户进度无需重建。
+
+开发依赖安装完成后，`node build-game.cjs` 从 `scene.mjs` 重建渲染包。需重新取得模型源文件时，用 `D:\software\Anaconda\python.exe fetch-models.py`，再运行 `D:\software\Anaconda\python.exe pack-models.py`；下载地址在 `assets/model-sources.json`。运行游戏不需要 Python、Node 或重新下载素材。
+
+![v0.2 实际运行画面](preview.png)
 
 桌面入口无需后台服务器。此目录所属 Git 仓库未配置远程地址；代码可本地提交，远程推送需配置后再执行。
