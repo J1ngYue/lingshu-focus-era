@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2e9"><meta name="description" content="把认真生活的每一天，变成科技、修仙与术法世界的成长。">
+  <title>灵枢 · 专注纪元</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script><script src="engine.js" defer></script><script src="scene.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#home" aria-label="灵枢首页"><img src="assets/icon.svg" alt=""><span>灵枢<small>专 注 纪 元</small></span></a>
+    <div class="nav-label">你的成长旅程</div><nav id="navigation" aria-label="主导航"></nav>
+    <div class="sidebar-bottom"><div class="tiny-quote">让现实中的每一步，<br>都在这个世界留下回响。</div><button class="nav-button" data-action="navigate" data-view="settings" id="settings-nav"></button><div class="local-status" id="save-status"><span></span> 进度已保存在本机</div></div>
+  </aside>
+  <div class="app-shell"><header class="topbar"><div class="breadcrumb" id="breadcrumb">我的修行 / 今日</div><div class="topbar-right"><span id="date-label"></span><button class="icon-button" data-action="quiet" aria-label="切换静心模式" title="静心模式" id="quiet-button"></button><div class="avatar">灵</div></div></header>
+    <main id="content" tabindex="-1"></main><footer class="app-footer">灵枢 v0.1 · 每一分认真，都算数。<span>科技 × 修仙 × 术法</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="task-dialog" aria-labelledby="task-dialog-title"><form id="task-form"><div class="dialog-heading"><h2 id="task-dialog-title">添加今日事项</h2><button type="button" class="icon-button" data-action="close-dialog" data-dialog="task-dialog" aria-label="关闭">×</button></div><p class="muted">设定一件具体的小事，让今天的自己更进一步。</p><input type="hidden" name="id"><label>事项名称<input name="title" placeholder="例如：读完第三章并整理笔记" maxlength="100" required autocomplete="off"></label><div class="form-grid"><label>预计时长（分钟）<input name="minutes" type="number" min="5" max="180" value="25" required></label><label>事项类型<select name="category"><option>学习</option><option>练习</option><option>复盘</option><option>生活</option></select></label></div><div class="hint-box">完成后按预计时长获得灵感点数；专注计时还会额外奖励学习时间。</div><div class="dialog-actions"><button type="button" class="button secondary" data-action="close-dialog" data-dialog="task-dialog">取消</button><button class="button primary" type="submit">保存事项</button></div></form></dialog>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><div class="dialog-heading"><h2 id="confirm-title"></h2><button class="icon-button" data-action="close-dialog" data-dialog="confirm-dialog" aria-label="关闭">×</button></div><p id="confirm-text"></p><div class="dialog-actions"><button class="button secondary" data-action="close-dialog" data-dialog="confirm-dialog">取消</button><button class="button primary" data-action="confirm">确认</button></div></dialog>
+  <input type="file" id="import-file" accept="application/json,.json" hidden>
+  <noscript>请使用启用 JavaScript 的浏览器打开灵枢。</noscript>
+</body></html>
