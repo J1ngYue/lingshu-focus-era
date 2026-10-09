@@ -1,4 +1,4 @@
-const assert=require('node:assert/strict'),{sampleCombat,sampleRig}=require('./combat-motion.cjs');
+const assert=require('node:assert/strict'),{sampleCombat,sampleRig,sampleRealtime}=require('./combat-motion.cjs');
 assert.equal(sampleCombat(.1).heroAction,'Walk');
 assert.equal(sampleCombat(.35).heroAction,'Attack');
 assert.equal(sampleCombat(.35).enemyAction,'Idle');
@@ -27,3 +27,6 @@ for(const enemy of [false,true])for(const ranged of [false,true])for(const letha
 }
 assert.ok(sampleRig(.49).strike>.95);assert.ok(sampleRig(.56,true).hit>.95);assert.ok(sampleRig(1.29).hit>.95);assert.equal(sampleRig(2).attack,0);
 console.log('PASS: continuous skeletal weights, impact recoil, footsteps, ranged casting, lethal motion and quiet mode.');
+for(let i=0;i<=1000;i++){const p=i/1000,r=sampleRealtime(p,.1,1,false,true);assert.ok(Object.values(r).every(Number.isFinite));if(i){const prev=sampleRealtime((i-1)/1000,.1,1,false,true);for(const k of ['wind','strike','walk','step'])assert.ok(Math.abs(r[k]-prev[k])<.03,k+' discontinuity');}}
+assert.equal(sampleRealtime(0,Infinity,0,false,true).strike,sampleRealtime(1,Infinity,0,false,true).strike);assert.ok(Object.values(sampleRealtime(.9,.04,1,true,true)).every(v=>v===0));assert.ok(sampleRealtime(.9,.045).hit>.99);
+console.log('PASS: independent charge-driven swings, continuous cycle wrap and quiet mode.');

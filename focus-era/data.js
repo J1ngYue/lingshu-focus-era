@@ -43,10 +43,11 @@ var FocusData = (() => {
   const skills = Object.entries(names).flatMap(([path,branches]) => branches.flatMap((list,branch) => list.split(',').map((name,step) => {
     const [effect,base,icon] = ({tech:techEffects,cultivation:cultivationEffects,arcane:arcaneEffects})[path][branch];
     const value = base * (1+Math.floor(step/6)), percentage=['crit','loot','xp','focus'].includes(effect);
+    const haste=((path==='tech'&&branch===2&&step%3===0)?.04:(path==='cultivation'&&[1,2,3].includes(branch))?.02:(path==='arcane'&&branch===5)?.03:0)*(1+Math.floor(step/6));
     const prefix=path==='tech'?`文明设施 · ${branchNames[path][branch]}`:path==='cultivation'?`修行层次 · ${branchNames[path][branch]}`:`法术技能 · ${branchNames[path][branch]}`;
     return {id:`${path}-${branch}-${step}`,path,branch,step,tier:Math.floor(step/3),column:branch,name,
-      description:`${prefix}。${effectText[effect]} +${percentage?Math.round(value*1000)/10+'%':value}。${path==='tech'&&step%3===0?'推动营地设施升级。':''}`,
-      effect,value,icon,max:1,level:Math.max(1,step*2-1),cost:15+step*12+Math.floor(step/6)*15,parent:step?`${path}-${branch}-${step===12&&!(branch===0&&path!=='arcane')?5:step-1}`:null};
+      description:`${prefix}。${effectText[effect]} +${percentage?Math.round(value*1000)/10+'%':value}。${haste?'攻速 +'+Math.round(haste*100)+'%。':''}${path==='tech'&&step%3===0?'推动营地设施升级。':''}`,
+      effect,value,haste,icon,max:1,level:Math.max(1,step*2-1),cost:15+step*12+Math.floor(step/6)*15,parent:step?`${path}-${branch}-${step===12&&!(branch===0&&path!=='arcane')?5:step-1}`:null};
   })));
   const jobs = [
     { id: 'engineer', name: '灵械师', path: 'tech', tier: 1, level: 3, cost: 45, requires: {tech: 1}, icon: 'cpu', description: '机关与灵能的初次共鸣', bonus: {atk: 8, def: 3} },
@@ -71,23 +72,23 @@ var FocusData = (() => {
     {name:'三界天枢城',sub:'属于长期坚持者的终点',level:25,palette:['#d9dbc3','#c5cba6','#a3ac82','#a2c3be'],monsters:['混沌守卫','时空裂兽','万象之影'],boss:'三界之主',hp:1450,atk:72,sprites:[126,127,128,129]}
   ];
   const equipment = ['初阶','精良','史诗','传说'].flatMap((quality, tier) => [
-    {id:`weapon-${tier}`,slot:'weapon',name:['竹锋短剑','灵能光刃','雷纹仙剑','星河裁决'][tier],quality,tier,icon:'sword',level:[1,4,9,16][tier],cost:[30,100,280,650][tier],shards:[0,2,6,15][tier],bonus:{atk:[5,14,32,65][tier]}},
+    {id:`weapon-${tier}`,slot:'weapon',name:['竹锋短剑','灵能光刃','雷纹仙剑','星河裁决'][tier],quality,tier,icon:'sword',level:[1,4,9,16][tier],cost:[30,100,280,650][tier],shards:[0,2,6,15][tier],bonus:{atk:[5,14,32,65][tier],haste:[.1,.2,.35,.5][tier]}},
     {id:`armor-${tier}`,slot:'armor',name:['布衣护甲','铜灵战衣','月辉道袍','太虚灵铠'][tier],quality,tier,icon:'shield',level:[1,4,9,16][tier],cost:[25,90,250,600][tier],shards:[0,2,6,15][tier],bonus:{def:[2,5,12,24][tier],hp:[10,25,55,110][tier]}},
     {id:`charm-${tier}`,slot:'charm',name:['静心玉佩','星砂怀表','天机灵环','万象之心'][tier],quality,tier,icon:'gem',level:[1,4,9,16][tier],cost:[25,100,260,620][tier],shards:[0,2,6,15][tier],bonus:{xp:[.03,.08,.15,.25][tier]}}
   ]);
   const achievements = [
-    {id:'first-task',name:'迈出第一步',description:'完成第一个事项',metric:'tasks',target:1,reward:10,icon:'check'},
-    {id:'first-focus',name:'一刻钟的自己',description:'累计专注 15 分钟',metric:'minutes',target:15,reward:15,icon:'focus'},
-    {id:'ten-tasks',name:'说到做到',description:'累计完成 10 个事项',metric:'tasks',target:10,reward:25,icon:'check'},
-    {id:'hour',name:'渐入佳境',description:'累计专注 60 分钟',metric:'minutes',target:60,reward:25,icon:'clock'},
-    {id:'five-skills',name:'三道初识',description:'点亮 5 个不同成长节点',metric:'skills',target:5,reward:20,icon:'spark'},
-    {id:'first-job',name:'找到自己的路',description:'完成第一次转职',metric:'jobs',target:1,reward:30,icon:'sword'},
-    {id:'first-boss',name:'守望者的认可',description:'首次击败地区首领',metric:'bosses',target:1,reward:20,icon:'crown'},
-    {id:'hundred',name:'原野漫游者',description:'累计击败 100 只怪兽',metric:'kills',target:100,reward:30,icon:'map'},
-    {id:'three-days',name:'再见面，老朋友',description:'连续 3 天完成任务或专注满 1 分钟',metric:'streak',target:3,reward:30,icon:'sun'},
-    {id:'ten-hours',name:'时间的复利',description:'累计专注 600 分钟',metric:'minutes',target:600,reward:80,icon:'orbit'},
-    {id:'triad',name:'科技 · 修仙 · 术法',description:'三棵树各点亮 3 个节点',metric:'triad',target:3,reward:45,icon:'leaf'},
-    {id:'all-bosses',name:'三界学者',description:'击败全部 8 位地区首领',metric:'bosses',target:8,reward:150,icon:'crown'}
+    {id:'first-task',name:'迈出第一步',description:'完成第一个事项',metric:'tasks',target:1,icon:'check'},
+    {id:'first-focus',name:'一刻钟的自己',description:'累计专注 15 分钟',metric:'minutes',target:15,icon:'focus'},
+    {id:'ten-tasks',name:'说到做到',description:'累计完成 10 个事项',metric:'tasks',target:10,icon:'check'},
+    {id:'hour',name:'渐入佳境',description:'累计专注 60 分钟',metric:'minutes',target:60,icon:'clock'},
+    {id:'five-skills',name:'三道初识',description:'点亮 5 个不同成长节点',metric:'skills',target:5,icon:'spark'},
+    {id:'first-job',name:'找到自己的路',description:'完成第一次转职',metric:'jobs',target:1,icon:'sword'},
+    {id:'first-boss',name:'守望者的认可',description:'首次击败地区首领',metric:'bosses',target:1,icon:'crown'},
+    {id:'hundred',name:'原野漫游者',description:'累计击败 100 只怪兽',metric:'kills',target:100,icon:'map'},
+    {id:'three-days',name:'再见面，老朋友',description:'连续 3 天完成任务或专注满 1 分钟',metric:'streak',target:3,icon:'sun'},
+    {id:'ten-hours',name:'时间的复利',description:'累计专注 600 分钟',metric:'minutes',target:600,icon:'orbit'},
+    {id:'triad',name:'科技 · 修仙 · 术法',description:'三棵树各点亮 3 个节点',metric:'triad',target:3,icon:'leaf'},
+    {id:'all-bosses',name:'三界学者',description:'击败全部 8 位地区首领',metric:'bosses',target:8,icon:'crown'}
   ];
   return {paths,skills,jobs,realms,regions,equipment,achievements,branchNames};
 })();

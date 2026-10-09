@@ -16,4 +16,10 @@ function sampleRig(t,enemy=false,ranged=false,lethal=false,clock=0,quiet=false){
  const walk=enemy?(lethal?0:pulse(t,.81,.94,1.05)+pulse(t,1.43,1.56,1.74)):ranged?0:pulse(t,0,.12,.28)+pulse(t,.58,.71,.87);
  return {wind,strike,hit,walk,step:Math.sin(t*30)*walk,breath:Math.sin(clock*3.4)*.012,sway:Math.sin(clock*2.3)*.009,death:enemy&&lethal?ease((t-.52)/.75):0,attack:Math.max(wind*.6,strike)};
 }
-module.exports={sampleCombat,sampleRig};
+// Each actor samples its own attack charge; attacks never wait for the other actor.
+function sampleRealtime(progress,hitAge=Infinity,clock=0,quiet=false,started=false){
+ if(quiet)return sampleRig(0,false,false,false,0,true);
+ const p=Math.max(0,Math.min(1,progress)),wind=pulse(p,.4,.7,.94),strike=Math.max(ease((p-.84)/.16),started?1-ease(p/.28):0),hit=pulse(hitAge,0,.045,.27),walk=pulse(p,.36,.6,.82);
+ return {wind,strike,hit,walk,step:Math.sin(p*Math.PI*2)*walk,breath:Math.sin(clock*3.4)*.012,sway:Math.sin(clock*2.3)*.009,death:0,attack:Math.max(wind*.6,strike)};
+}
+module.exports={sampleCombat,sampleRig,sampleRealtime};
