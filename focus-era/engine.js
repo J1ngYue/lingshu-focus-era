@@ -8,7 +8,7 @@ var FocusEngine = (() => {
   function grant(s, points, xp, now) { points = Math.max(0,Math.floor(points)); const st=stats(s);s.points += points; s.earned += points; s.xp += Math.floor(xp*(1+st.xp));s.coins+=Math.floor(xp/2*(1+st.loot)); daily(s,day(now)).points += points; }
   function create(now = Date.now()) {
     const s = {version:1,name:'小灵',createdAt:now,lastTick:now,xp:0,points:0,earned:0,coins:0,shards:0,
-      skills:{},job:null,jobHistory:[],gear:{},owned:[],region:0,stage:1,kills:0,attacks:0,bosses:[],bestiary:{},battle:null,battleEvents:[],battleEventId:0,
+      skills:{},job:null,jobHistory:[],gear:{weapon:'starter-sword'},owned:['starter-sword'],lastDrop:null,region:0,stage:1,kills:0,attacks:0,bosses:[],bestiary:{},battle:null,battleEvents:[],battleEventId:0,
       focus:null,breakUntil:0,sessions:[],tasks:[],days:{},claimed:[],logs:[],settings:{goal:90,quiet:false}};
     return s;
   }
@@ -92,6 +92,19 @@ var FocusEngine = (() => {
     const r=D.regions[s.region],boss=s.stage%10===0,index=boss?3:(s.stage-1)%3;
     return {name:boss?r.boss:r.monsters[index],boss,sprite:r.sprites[index],hp:Math.round(r.hp*(boss?3:1)*(1+(s.stage-1)%10*.08)),atk:Math.round(r.atk*(boss?1.5:1)),speed:(.5+s.region*.02)*(boss?.85:1),key:`${s.region}-${index}`};
   }
+  function dropChances(s) {
+    const progress=(level(s).value-1)/59;
+    return [.8-.6*progress,.17+.2*progress,.028+.26*progress,.002+.14*progress];
+  }
+  function dropEquipment(s,boss=false,now=Date.now(),random=Math.random) {
+    if(!s.focus?.running||random()>=(boss?1:.25))return null;
+    const chances=dropChances(s);let roll=random(),tier=0;
+    while(tier<3&&roll>=chances[tier])roll-=chances[tier++];
+    const pool=D.equipment.filter(e=>e.id!=='starter-sword'&&e.tier===tier),item=pool[Math.floor(random()*pool.length)],duplicate=s.owned.includes(item.id),shards=duplicate?1+tier:0;
+    if(duplicate)s.shards+=shards;else s.owned.push(item.id);
+    s.lastDrop={id:uid(),itemId:item.id,name:item.name,quality:item.quality,tier,duplicate,shards,at:now};
+    log(s,`拾取 ${item.quality}·${item.name}${duplicate?`（重复，化为 ${shards} 星屑）`:'，已收入灵器匣'}`,'loot',now);return s.lastDrop;
+  }
   function battleAdvance(s,seconds,now) {
     const st=stats(s),spells=D.skills.filter(k=>k.path==='arcane'&&s.skills[k.id]);let left=seconds;
     const emit=event=>{s.battleEvents.push({...event,id:++s.battleEventId,at:now-left*1000});if(s.battleEvents.length>32)s.battleEvents.shift();};
@@ -102,9 +115,10 @@ var FocusEngine = (() => {
       const step=Math.min(left,(1-b.heroCharge)/st.speed,(1-b.enemyCharge)/e.speed);left-=step;b.heroCharge+=step*st.speed;b.enemyCharge+=step*e.speed;
       if(b.heroCharge>=1-1e-9){b.heroCharge=0;s.attacks++;const critical=s.attacks%Math.max(2,Math.round(1/st.crit))===0,spell=spells.length&&s.attacks%3===0?spells[(s.attacks/3-1)%spells.length]:null;
         if(spell){s.lastSpell={name:spell.name,branch:spell.branch,at:now-left*1000};if(spell.branch===3)b.heroHp=Math.min(st.hp,b.heroHp+8+spell.step*2);if([1,5].includes(spell.branch))b.guard=.6;}
-        const damage=Math.max(1,Math.round(st.atk*(critical?1.8:1)*(spell&&[0,2,4].includes(spell.branch)?1.35:1)));b.enemyHp=Math.max(0,b.enemyHp-damage);const lethal=b.enemyHp===0;let gain=0;
+        const damage=Math.max(1,Math.round(st.atk*(critical?1.8:1)*(spell&&[0,2,4].includes(spell.branch)?1.35:1)));b.enemyHp=Math.max(0,b.enemyHp-damage);const lethal=b.enemyHp===0;let gain=0,drop=null;
         if(lethal){gain=Math.round((3+s.region*3)*(1+st.loot)*(e.boss?5:1));s.coins+=gain;s.kills++;s.bestiary[e.key]=(s.bestiary[e.key]||0)+1;if(e.boss){s.shards+=1+s.region;if(!s.bosses.includes(s.region))s.bosses.push(s.region);log(s,`击败 ${e.name} · +${gain} 灵石 / +${1+s.region} 星屑`,'battle',now-left*1000);}s.stage++;s.battle=null;}
-        emit({actor:'hero',enemy:e,damage,lethal,gain,spell:spell?{name:spell.name,branch:spell.branch}:null});
+        if(lethal)drop=dropEquipment(s,e.boss,now-left*1000);
+        emit({actor:'hero',enemy:e,damage,lethal,gain,drop,spell:spell?{name:spell.name,branch:spell.branch}:null});
       }
       if(s.battle===b&&b.enemyCharge>=1-1e-9){b.enemyCharge=0;const damage=Math.max(1,Math.round((e.atk-st.def)*b.guard));b.guard=1;b.heroHp=Math.max(0,b.heroHp-damage);emit({actor:'enemy',enemy:e,damage});if(!b.heroHp){b.enemyHp=e.hp;b.heroCharge=b.enemyCharge=0;b.revive=30;log(s,`在 ${e.name} 面前暂时撤退，专注修行 30 秒后重整旗鼓。`,'battle',now-left*1000);}}
     }
@@ -143,6 +157,7 @@ var FocusEngine = (() => {
     s.jobHistory=Array.isArray(raw.jobHistory)?raw.jobHistory.filter(id=>D.jobs.some(j=>j.id===id)):[];
     s.owned=Array.isArray(raw.owned)?raw.owned.filter(id=>D.equipment.some(e=>e.id===id)):[];s.gear={};
     for(const slot of ['weapon','armor','charm'])if(s.owned.includes(raw.gear?.[slot])&&D.equipment.some(e=>e.id===raw.gear[slot]&&e.slot===slot))s.gear[slot]=raw.gear[slot];
+    if(!s.owned.includes('starter-sword'))s.owned.unshift('starter-sword');if(!s.gear.weapon)s.gear.weapon='starter-sword';
     s.bosses=Array.isArray(raw.bosses)?[...new Set(raw.bosses.filter(n=>Number.isInteger(n)&&D.regions[n]))]:[];
     s.bestiary={};for(const [key,n] of Object.entries(raw.bestiary||{}))if(/^\d+-[0-3]$/.test(key)&&number(n))s.bestiary[key]=n;
     s.claimed=Array.isArray(raw.claimed)?raw.claimed.filter(id=>D.achievements.some(a=>a.id===id)):[];
@@ -152,6 +167,6 @@ var FocusEngine = (() => {
     s.breakUntil=number(raw.breakUntil,1e14)?raw.breakUntil:0;s.settings={goal:Math.max(15,Math.min(480,Number(raw.settings?.goal)||90)),quiet:!!raw.settings?.quiet};
     return s;
   }
-  return {D,day,uid,create,level,stats,daily,log,pathCount,skillReason,learn,jobReason,transfer,addTask,taskReward,completeTask,startFocus,pauseFocus,finishFocus,advance,enemy,regionReason,travel,craft,streak,metric,claim,restore};
+  return {D,day,uid,create,level,stats,daily,log,pathCount,skillReason,learn,jobReason,transfer,addTask,taskReward,completeTask,startFocus,pauseFocus,finishFocus,advance,enemy,dropChances,dropEquipment,regionReason,travel,craft,streak,metric,claim,restore};
 })();
 if (typeof module !== 'undefined') module.exports = FocusEngine;

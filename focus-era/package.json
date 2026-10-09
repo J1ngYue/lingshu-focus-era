@@ -1,6 +1,6 @@
 {
   "name": "lingshu-focus-era",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "description": "Offline learning idle RPG with 324 world, cultivation and magic nodes",
   "scripts": {

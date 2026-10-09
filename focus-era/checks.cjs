@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const E = require('./engine.js'), D = E.D;
 const time = new Date(2026,9,8,10,0).getTime();
 const fresh = () => {const s=E.create(time);E.addTask(s,{title:'阅读',minutes:25,category:'学习'},time);return s;};
-const zero=E.create(time);for(const key of ['xp','points','earned','coins','shards','kills','attacks'])assert.equal(zero[key],0);for(const key of ['tasks','owned','bosses','sessions','claimed','logs'])assert.equal(zero[key].length,0);assert.equal(zero.job,null);assert.deepEqual(zero.skills,{});assert.deepEqual(zero.gear,{});assert.deepEqual(zero.days,{});
+const zero=E.create(time);for(const key of ['xp','points','earned','coins','shards','kills','attacks'])assert.equal(zero[key],0);for(const key of ['tasks','bosses','sessions','claimed','logs'])assert.equal(zero[key].length,0);assert.equal(zero.job,null);assert.deepEqual(zero.skills,{});assert.deepEqual(zero.owned,['starter-sword']);assert.deepEqual(zero.gear,{weapon:'starter-sword'});assert.deepEqual(zero.days,{});assert.equal(E.stats(zero).atk,10);assert.equal(E.stats(zero).speed,1);
 for (const path of Object.keys(D.paths)) assert.equal(D.skills.filter(s=>s.path===path).length,108);
 assert.equal(new Set(D.skills.map(s=>s.id)).size,324);
 assert.equal(new Set(D.skills.map(s=>s.name)).size,324);
@@ -11,7 +11,7 @@ for (const path of Object.keys(D.paths)) for(let branch=0;branch<6;branch++) {
   for(let i=1;i<nodes.length;i++)assert.equal(nodes[i].parent,nodes[i===12&&!(branch===0&&path!=='arcane')?5:i-1].id);
   const children=nodes.filter(n=>n.parent===nodes[5].id);assert.equal(children.length,branch===0&&path!=='arcane'?1:2,'real progression fork');
 }
-assert.equal(D.jobs.length,9);assert.equal(D.regions.length,8);assert.equal(D.equipment.length,12);
+assert.equal(D.jobs.length,9);assert.equal(D.regions.length,8);assert.equal(D.equipment.length,13);
 const full=fresh();full.points=100000;full.xp=40000;
 for(const node of D.skills)assert.equal(E.learn(full,node.id,time).ok,true,`unreachable node: ${node.id}`);
 assert.equal(E.metric(full,'skills'),324);assert.equal(E.restore(JSON.parse(JSON.stringify(full)),time).skills['arcane-5-17'],1);
@@ -65,4 +65,18 @@ const killer=fresh();E.startFocus(killer,1,null,time);E.advance(killer,time+4000
 const long=fresh();E.startFocus(long,1,null,time);E.advance(long,time+4*3600000);const stopped=JSON.stringify([long.points,long.xp,long.coins,long.kills,long.attacks]);E.advance(long,time+8*3600000);assert.equal(JSON.stringify([long.points,long.xp,long.coins,long.kills,long.attacks]),stopped);assert.equal(long.points,6);
 const delayed=fresh();E.startFocus(delayed,1,null,time+3600000);E.advance(delayed,time+3601000);assert.equal(delayed.attacks,1);assert.equal(delayed.focus.seconds,1);assert.equal(delayed.points,0);assert.equal(delayed.xp,0);
 const defeated=fresh();defeated.region=7;E.startFocus(defeated,2,null,time);E.advance(defeated,time+4000);assert.ok(defeated.battle.revive>0);const attacks=defeated.attacks;E.advance(defeated,time+10000);assert.equal(defeated.attacks,attacks);E.advance(defeated,time+36000);assert.ok(defeated.attacks>attacks);
-console.log(`PASS: zero start, study/task-only rewards, idle and paused progression frozen, independent clocks; 6 seconds = ${slow.attacks} vs ${fast.attacks} attacks; all 324 nodes, jobs, equipment, saves and focus checks.`);
+// Each level improves all three higher rarities, while the distribution remains valid.
+let previous=E.dropChances(zero);
+for(let lv=1;lv<=60;lv++){const s=E.create(time);s.xp=55*(lv-1)*lv/2;const probabilities=E.dropChances(s);assert.equal(E.level(s).value,lv);assert.ok(Math.abs(probabilities.reduce((a,b)=>a+b,0)-1)<1e-12);assert.ok(probabilities.every(p=>p>=0&&p<=1));for(let tier=1;tier<4;tier++)assert.ok(probabilities[tier]>=previous[tier]);previous=probabilities;}
+assert.ok(Math.abs(E.dropChances(zero).slice(2).reduce((a,b)=>a+b)-.03)<1e-12);assert.ok(Math.abs(previous.slice(2).reduce((a,b)=>a+b)-.43)<1e-12);
+const rolls=(...values)=>()=>{assert.ok(values.length,'unexpected random draw');return values.shift();};
+const loot=E.create(time);assert.equal(E.dropEquipment(loot,true,time,()=>{throw Error('idle must not roll loot');}),null);E.startFocus(loot,1,null,time);
+assert.equal(E.dropEquipment(loot,false,time,rolls(.25)),null);assert.deepEqual(loot.owned,['starter-sword']);
+for(const [tier,qualityRoll] of [[0,0],[1,.85],[2,.985],[3,.999]])for(const [slot,slotRoll] of [['weapon',0],['armor',.34],['charm',.99]]){const drop=E.dropEquipment(loot,false,time,rolls(.249,qualityRoll,slotRoll));assert.equal(drop.itemId,`${slot}-${tier}`);assert.equal(drop.duplicate,false);assert.ok(loot.owned.includes(drop.itemId));}
+assert.equal(loot.owned.length,13);assert.deepEqual(loot.gear,{weapon:'starter-sword'},'picking up gear must not silently replace equipped items');assert.deepEqual([loot.points,loot.xp,loot.coins],[0,0,0]);
+const duplicate=E.dropEquipment(loot,true,time,rolls(.999,.999,0));assert.equal(duplicate.itemId,'weapon-3');assert.equal(duplicate.duplicate,true);assert.equal(duplicate.shards,4);assert.equal(loot.shards,4);assert.equal(loot.owned.length,13);
+assert.equal(E.craft(loot,'weapon-3',time).ok,true,'dropped equipment can be worn without its forging level');assert.equal(loot.gear.weapon,'weapon-3');assert.equal(loot.coins,0);
+E.pauseFocus(loot,time);const pausedLoot=JSON.stringify(loot);assert.equal(E.dropEquipment(loot,true,time,()=>{throw Error('paused must not roll loot');}),null);assert.equal(JSON.stringify(loot),pausedLoot);
+const old=E.create(time);old.owned=['armor-1','weapon-2'];old.gear={armor:'armor-1',weapon:'weapon-2'};old.xp=777;const migrated=E.restore(old,time);assert.equal(migrated.xp,777);assert.equal(migrated.gear.weapon,'weapon-2');assert.equal(migrated.gear.armor,'armor-1');assert.ok(migrated.owned.includes('starter-sword'));assert.equal(migrated.owned.length,3);assert.deepEqual(E.restore({...E.create(time),gear:{},owned:[]},time).gear,{weapon:'starter-sword'});
+const bossLoot=E.create(time);bossLoot.stage=10;E.startFocus(bossLoot,1,null,time);E.advance(bossLoot,time+22000);const bossEvent=bossLoot.battleEvents.find(e=>e.lethal&&e.enemy.boss);assert.ok(bossEvent?.drop,'real focused boss kill drops equipment');assert.ok(bossLoot.owned.includes(bossEvent.drop.itemId));assert.deepEqual([bossLoot.points,bossLoot.xp],[0,0]);const idleOwned=[...bossLoot.owned];E.finishFocus(bossLoot,time+22000);E.advance(bossLoot,time+999000);assert.deepEqual(bossLoot.owned,idleOwned);
+console.log(`PASS: starter sword, zero growth, focus-only rewards/loot, all 60 rarity curves, 12 loot items, duplicates, boss drops, save migration, independent clocks; 6 seconds = ${slow.attacks} vs ${fast.attacks} attacks; all 324 nodes, jobs, gear and focus checks.`);

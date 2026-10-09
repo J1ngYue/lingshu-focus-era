@@ -71,11 +71,11 @@ var FocusData = (() => {
     {name:'太虚仙境',sub:'心流尽处，万象初生',level:20,palette:['#d8cae9','#c4b3dc','#9c88b5','#bbd0e5'],monsters:['虚空游灵','梦境织者','道纹异兽'],boss:'太虚观测者',hp:1000,atk:58,sprites:[124,122,125,128]},
     {name:'三界天枢城',sub:'属于长期坚持者的终点',level:25,palette:['#d9dbc3','#c5cba6','#a3ac82','#a2c3be'],monsters:['混沌守卫','时空裂兽','万象之影'],boss:'三界之主',hp:1450,atk:72,sprites:[126,127,128,129]}
   ];
-  const equipment = ['初阶','精良','史诗','传说'].flatMap((quality, tier) => [
+  const equipment = [{id:'starter-sword',slot:'weapon',name:'青锋佩剑',quality:'基础',tier:0,icon:'sword',level:1,cost:0,shards:0,bonus:{}},...['初阶','精良','史诗','传说'].flatMap((quality, tier) => [
     {id:`weapon-${tier}`,slot:'weapon',name:['竹锋短剑','灵能光刃','雷纹仙剑','星河裁决'][tier],quality,tier,icon:'sword',level:[1,4,9,16][tier],cost:[30,100,280,650][tier],shards:[0,2,6,15][tier],bonus:{atk:[5,14,32,65][tier],haste:[.1,.2,.35,.5][tier]}},
     {id:`armor-${tier}`,slot:'armor',name:['布衣护甲','铜灵战衣','月辉道袍','太虚灵铠'][tier],quality,tier,icon:'shield',level:[1,4,9,16][tier],cost:[25,90,250,600][tier],shards:[0,2,6,15][tier],bonus:{def:[2,5,12,24][tier],hp:[10,25,55,110][tier]}},
     {id:`charm-${tier}`,slot:'charm',name:['静心玉佩','星砂怀表','天机灵环','万象之心'][tier],quality,tier,icon:'gem',level:[1,4,9,16][tier],cost:[25,100,260,620][tier],shards:[0,2,6,15][tier],bonus:{xp:[.03,.08,.15,.25][tier]}}
-  ]);
+  ])];
   const achievements = [
     {id:'first-task',name:'迈出第一步',description:'完成第一个事项',metric:'tasks',target:1,icon:'check'},
     {id:'first-focus',name:'一刻钟的自己',description:'累计专注 15 分钟',metric:'minutes',target:15,icon:'focus'},
