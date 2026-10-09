@@ -6,4 +6,14 @@ function sampleCombat(t,ranged=false,lethal=false){
  const enemyAction=lethal&&t>=.48?'Death':t>=.48&&t<.72?'Hit':t>=.82&&t<1.04?'Walk':t>=1.04&&t<1.43?'Attack':t>=1.43&&t<1.73?'Walk':'Idle';
  return {heroMove,enemyMove,heroAction,enemyAction,heroImpact:t>=.48,enemyImpact:!lethal&&t>=1.2,done:t>=1.8};
 }
-module.exports={sampleCombat};
+function pulse(t,start,peak,end){return t<=start||t>=end?0:t<peak?ease((t-start)/(peak-start)):1-ease((t-peak)/(end-peak));}
+// Continuous joint weights, separate from discrete animation labels and game rewards.
+function sampleRig(t,enemy=false,ranged=false,lethal=false,clock=0,quiet=false){
+ if(quiet)return {wind:0,strike:0,hit:0,walk:0,step:0,breath:0,sway:0,death:0,attack:0};
+ const wind=enemy&&!lethal?pulse(t,.85,1.08,1.22):enemy?0:pulse(t,.12,.32,.49);
+ const strike=enemy&&!lethal?pulse(t,1.07,1.23,1.56):enemy?0:pulse(t,.34,.49,.79);
+ const hit=enemy?pulse(t,.47,.56,.91):lethal?0:pulse(t,1.19,1.29,1.64);
+ const walk=enemy?(lethal?0:pulse(t,.81,.94,1.05)+pulse(t,1.43,1.56,1.74)):ranged?0:pulse(t,0,.12,.28)+pulse(t,.58,.71,.87);
+ return {wind,strike,hit,walk,step:Math.sin(t*30)*walk,breath:Math.sin(clock*3.4)*.012,sway:Math.sin(clock*2.3)*.009,death:enemy&&lethal?ease((t-.52)/.75):0,attack:Math.max(wind*.6,strike)};
+}
+module.exports={sampleCombat,sampleRig};
